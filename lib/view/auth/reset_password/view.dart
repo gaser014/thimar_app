@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_assets.dart';
 import 'package:themar/core/design/unit/app_string.dart';
 import 'package:themar/core/design/widget/app_button.dart';
@@ -55,7 +56,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       controller: bloc.passwordController,
                       keyboardType: TextInputType.visiblePassword,
                     ),
-                    const SizedBox(height: 16),
+                     SizedBox(height: 16.h),
                     //rePassword
                     AppInput(
                       autofillHints: const [AutofillHints.password],
@@ -75,7 +76,7 @@ class _ResetPasswordViewState extends State<ResetPasswordView> {
                       controller: bloc.rePasswordController,
                       keyboardType: TextInputType.visiblePassword,
                     ),
-                    const SizedBox(height: 20),
+                     SizedBox(height: 20.h),
                     SizedBox(
                       width: double.infinity,
                       child: AppButton(

@@ -1,9 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:themar/core/logic/helper_methods.dart';
+import 'package:themar/feature/categories_details/view.dart';
 
+import '../../core/design/widget/image.dart';
 import '../../core/logic/dio_helper.dart';
-import 'model.dart';
+part  'model.dart';
 part 'event.dart';
 part 'state.dart';
+part 'view.dart';
 class CategoriesBloc extends Bloc<CategoriesEvents, CategoriesState> {
   int index = 0;
   CategoriesBloc() : super(CategoriesState()) {

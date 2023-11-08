@@ -136,3 +136,61 @@ class Items {
     DataAssets.networkApple: 10,
   };
 }
+// class OrderCurrent {
+//   late final List<OrderCurrentModel> list;
+//
+//   OrderCurrent.fromJson(Map<String, dynamic> json) {
+//     list = List.from(json['data'])
+//         .map((e) => OrderCurrentModel.fromJson(e))
+//         .toList();
+//   }
+// }
+
+// class OrderCurrentModel {
+//   late final int id;
+//   late final String status;
+//   late final String date;
+//   late final String time;
+//   late final double orderPrice;
+//   late final double deliveryPrice;
+//   late final double totalPrice;
+//   late final String clientName;
+//   late final String phone;
+//   late final String location;
+//   late final String deliveryPayer;
+//   late final List<Products> products;
+//   late final String payType;
+//   late final String note;
+//   late final int isVip;
+//   late final int vipDiscountPercentage;
+//
+//   OrderCurrentModel.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     status = json['status'];
+//     date = json['date'];
+//     time = json['time'];
+//     orderPrice = json['order_price'];
+//     deliveryPrice = json['delivery_price'];
+//     totalPrice = json['total_price'];
+//     clientName = json['client_name'];
+//     phone = json['phone'];
+//     location = json['location'];
+//     deliveryPayer = json['delivery_payer'];
+//     products =
+//         List.from(json['products']).map((e) => Products.fromJson(e)).toList();
+//     payType = json['pay_type'];
+//     note = json['note'];
+//     isVip = json['is_vip'];
+//     vipDiscountPercentage = json['vip_discount_percentage'];
+//   }
+// }
+//
+// class Products {
+//   late final String name;
+//   late final String url;
+//
+//   Products.fromJson(Map<String, dynamic> json) {
+//     name = json['name'];
+//     url = json['url'];
+//   }
+// }

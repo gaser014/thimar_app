@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_string.dart';
 import 'package:themar/feature/cities/bloc.dart';
 
@@ -21,15 +22,15 @@ class _CitiesSheetState extends State<CitiesSheet> {
       height:double.infinity,
       child: Column(
         children: [
-          const SizedBox(
-            height: 24,
+           SizedBox(
+            height: 24.h,
           ),
           Text(
             DataString.country,
             style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontWeight: FontWeight.w700,
-              fontSize: 18,
+              fontSize: 18.sp,
             ),
           ),
 
@@ -43,7 +44,7 @@ class _CitiesSheetState extends State<CitiesSheet> {
                   );
                 } else if (state is CitiesSuccessState) {
                   return ListView.builder(
-                    padding: const EdgeInsets.all(16),
+                    padding:  EdgeInsets.all(16.r),
                     itemBuilder: (context, index) => _Item(
                   model: state.model.list[index],
                     ),
@@ -52,10 +53,10 @@ class _CitiesSheetState extends State<CitiesSheet> {
                 } else if(state is CitiesFailedState)  {
                   return
  Center(child:  Text(state.message,
-            style: const TextStyle(
+            style:  TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.w700,
-                    fontSize: 18,
+                    fontSize: 18.sp,
                 ),),);
                 }else{
                   return const SizedBox();
@@ -81,10 +82,10 @@ class _Item extends StatelessWidget {
         Navigator.pop(context, model);
       },
       child: Container(
-        padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.only(bottom: 10),
+        padding:  EdgeInsets.all(8.r),
+        margin:  EdgeInsets.only(bottom: 10.h),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(7),
+            borderRadius: BorderRadius.circular(7.r),
             color: Theme.of(context).primaryColor.withOpacity(.1)),
         child: Center(
           child: Text(

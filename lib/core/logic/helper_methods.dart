@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-final navigatorKey = GlobalKey<NavigatorState>();
-void navigateTo(Widget page) {
-      Navigator.of( navigatorKey.currentContext!).push(
+var navigatorKey = GlobalKey<NavigatorState>();
+
+void navigateTo(Widget page,{bool removeHistory = false}) {
+  Navigator.pushAndRemoveUntil(
+    navigatorKey.currentContext!,
     MaterialPageRoute(
       builder: (context) => page,
     ),
+    (route) => !removeHistory,
   );
 }
 
@@ -13,13 +16,17 @@ enum MassageType {
   success,
   failed,
   warning,
+}enum ProductType {
+  favorite,
+  custom,
+  category,
 }
 
 void showMessage({
   required String message,
   MassageType type = MassageType.failed,
 }) {
-  print('message is $message');
+  debugPrint('message is $message');
   if (message.isNotEmpty) {
     ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
       SnackBar(

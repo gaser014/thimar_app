@@ -6,13 +6,14 @@ class AppImage extends StatelessWidget {
   final double? width;
   final double? height;
   final BoxFit fit;
-
+final Color? color;
   const AppImage({
     Key? key,
     required this.path,
     this.width,
     this.height,
     required this.fit,
+    this.color,
   }) : super(key: key);
 
   @override
@@ -30,6 +31,7 @@ class AppImage extends StatelessWidget {
         fit: fit,
         width: width,
         height: height,
+        color: color,
       );}
     else{
       return Image.asset(

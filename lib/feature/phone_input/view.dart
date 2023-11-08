@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_assets.dart';
 import 'package:themar/core/design/unit/app_string.dart';
 import 'package:themar/core/design/widget/app_input.dart';
@@ -25,11 +26,11 @@ class _PhoneInputState extends State<PhoneInput> {
             cubit.change(widget.phoneController.text.length);
           },
           widget: Container(
-            width: 70,
-            height: 60,
+            width: 70.w,
+            height: 60.h,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(15.r),
               border: Border.all(color: Color(0xffF3F3F3)),
             ),
             child: Center(
@@ -40,11 +41,11 @@ class _PhoneInputState extends State<PhoneInput> {
                     state is PhoneInputStateChange
                         ? state.icon
                         : DataAssets.iconsKSA,
-                    width: 32,
-                    height: 20,
+                    width: 32.w,
+                    height: 20.h,
                     fit: BoxFit.scaleDown,
                   ),
-                  const SizedBox(height: 4),
+                   SizedBox(height: 4.h),
                   Text(
                     state is PhoneInputStateChange
                         ? state.countryCode

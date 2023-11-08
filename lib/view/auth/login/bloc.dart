@@ -17,7 +17,7 @@ part 'event.dart';
 part 'state.dart';
 
 class LoginBloc extends Bloc<LoginEvents, LoginState> {
-  final formKey = GlobalKey<FormState>();
+  var formKey = GlobalKey<FormState>();
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
 

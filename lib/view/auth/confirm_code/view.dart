@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:themar/core/design/unit/app_string.dart';
 import 'package:themar/core/design/widget/app_button.dart';
@@ -61,7 +62,7 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                         }
                       },
                     ),
-                    const SizedBox(height: 20),
+                     SizedBox(height: 20.h),
                     SizedBox(
                       width: double.infinity,
                       child: AppButton(
@@ -75,21 +76,21 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                         isLoading: state is ConfirmLoadingState,
                       ),
                     ),
-                    const SizedBox(height: 28),
-                    const Text(
+                     SizedBox(height: 28.h),
+                     Text(
                       DataString.resendCode,
                       style: TextStyle(
-                        color: Color(0xff707070),
+                        color: const Color(0xff707070),
                         fontWeight: FontWeight.w300,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                       ),
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 24),
              state is TimerEnd
                         ? SizedBox(
-                            width: 132,
-                            height: 48,
+                            width: 132.w,
+                            height: 48.h,
                             child: OutlinedButton(
                                 onPressed: () {
                                   bloc.add(ResendEvent(widget.phone));
@@ -99,14 +100,14 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                                   style: TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 15,
+                                    fontSize: 15.sp,
                                   ),
                                   textAlign: TextAlign.center,
                                 )),
                           )
                         :state is TimerState? SizedBox(
-                            width: 60,
-                            height: 60,
+                            width: 60.w,
+                            height: 60.h,
                             child: Stack(
                               fit: StackFit.expand,
                               children: [
@@ -118,10 +119,10 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                                 Center(
                                   child: Text(
                                     "${state.currentSecond ~/ 60}:${(state.currentSecond % 60).toString().padLeft(2, '0')}",
-                                    style: const TextStyle(
-                                      color: Color(0xff707070),
+                                    style:  TextStyle(
+                                      color: const Color(0xff707070),
                                       fontWeight: FontWeight.w300,
-                                      fontSize: 16,
+                                      fontSize: 16.sp,
                                     ),
                                     textAlign: TextAlign.center,
                                   ),

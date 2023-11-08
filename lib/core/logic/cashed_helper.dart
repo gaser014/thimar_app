@@ -23,9 +23,8 @@ class CachedHelper {
   }
 
   static bool  isActive ()=> _prefs.getBool('isActive')??false;
-
+static String  getToken ()=> _prefs.getString('token')??'';
   static bool isAuth() {
-    String token = _prefs.getString('token') ?? '';
-    return token.isEmpty;
+    return getToken().isEmpty;
   }
 }

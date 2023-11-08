@@ -1,3 +1,4 @@
+part of 'bloc.dart';
 class SliderData {
   late final List<SliderModel> list;
 

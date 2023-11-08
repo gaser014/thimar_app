@@ -72,5 +72,20 @@ static const String delivery ='التوصيل إلى';
 static const String viewAll ='عرض الكل';
 static const String amount ='السعر / ';
 static const String add ='أضف للسلة';
+//--------------------------------------------------------------------------------
+//product view
+static const String  codeProduct='كود المنتج';
+static const String  description='تفاصيل المنتج';
+static const String  review='التقييمات';
+static const String  relatedProducts='منتجات مشابهة';
+static const String  showAll='عرض الكل';
+static const String  addToCard='إضافة إلي السلة';
+static const String  noReview='لا يوجد تقييمات';
+//--------------------------------------------------------------------------------
+//favorite view
+static const String  myFav='المفضلة';
+//--------------------------------------------------------------------------------
+//cart view
+static const String  myCart='السلة';
 
 }

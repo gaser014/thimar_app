@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_string.dart';
 import 'package:themar/core/design/widget/app_button.dart';
 import 'package:themar/core/design/widget/auth_body.dart';
@@ -30,7 +31,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
               child: Column(
                 children: [
                   PhoneInput(bloc.phoneController),
-                  const SizedBox(height: 20),
+                   SizedBox(height: 20.h),
 
                   BlocBuilder(
                     bloc: bloc,

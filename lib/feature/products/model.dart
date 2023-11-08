@@ -1,3 +1,4 @@
+part of'bloc.dart';
 class ProductsData {
   late final List<ProductModel> list;
 
@@ -14,9 +15,9 @@ class ProductsData {
     // links = Links.fromJson(json['links']);
     // meta = Meta.fromJson(json['meta']);
 
-    userCartCount = json['user_cart_count'];
-    maxPrice = json['max_price'];
-    minPrice = json['min_price'];
+    userCartCount = json['user_cart_count']??0;
+    maxPrice = json['max_price']??0;
+    minPrice = json['min_price']??0;
   }
 }
 
@@ -27,9 +28,9 @@ class ProductModel {
   late final String description;
   late final String code;
   late final int priceBeforeDiscount;
-  late final num price;
+  late final double price;
   late final int discount;
-  late final double amount;
+  late final int amount;
   late final int isActive;
   late final bool isFavorite;
   late final Unit unit;
@@ -44,13 +45,13 @@ class ProductModel {
     description = json['description'];
     code = json['code'];
     priceBeforeDiscount = json['price_before_discount'];
-    price = json['price'];
+    price = json['price']*1.0;
     discount = (json['discount'] * 100).toInt();
     amount = json['amount'];
     isActive = json['is_active'];
     isFavorite = json['is_favorite'];
     unit = Unit.fromJson(json['unit']);
-    images = List.from(json['images']).map((e) => Images.fromJson(e)).toList();
+    images = List.from(json['images']??[]).map((e) => Images.fromJson(e)).toList();
     mainImage = json['main_image'];
     createdAt = json['created_at'];
   }

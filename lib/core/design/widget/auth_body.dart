@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_assets.dart';
 import 'package:themar/core/design/unit/app_string.dart';
 
@@ -42,19 +43,19 @@ class _AuthBodyState extends State<AuthBody> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.0.r),
         child: ListView(
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 4),
+                 SizedBox(height: 4.h),
                 Center(
                   child: Image.asset(
                     DataAssets.imagesLogo,
-                    width: 130,
-                    height: 125,
+                    width: 130.w,
+                    height: 125.h,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -62,29 +63,29 @@ class _AuthBodyState extends State<AuthBody> {
                   widget.title,
                   style: TextStyle(
                     color: Theme.of(context).primaryColor,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   widget.subTitle,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     color: Color(0xff707070),
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w300,
                   ),
                 ),
                 widget.phone == null
                     ? const SizedBox()
                     : SizedBox(
-                        height: 24,
+                        height: 24.h,
                         child: Row(
                           children: [
                             Text(
                               widget.phone!,
-                              style: const TextStyle(
+                              style:  TextStyle(
                                 color: Color(0xff707070),
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.w300,
                               ),
                               textDirection: TextDirection.ltr,
@@ -98,7 +99,7 @@ class _AuthBodyState extends State<AuthBody> {
                                 widget.phoneChanged!,
                                 style: TextStyle(
                                   color: Theme.of(context).primaryColor,
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   fontWeight: FontWeight.w500,
                                   decoration: TextDecoration.underline,
                                 ),
@@ -107,9 +108,9 @@ class _AuthBodyState extends State<AuthBody> {
                           ],
                         ),
                       ),
-                const SizedBox(height: 24),
+                 SizedBox(height: 24.h),
                 widget.widgetForm,
-                const SizedBox(height: 48),
+                 SizedBox(height: 48.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -117,7 +118,7 @@ class _AuthBodyState extends State<AuthBody> {
                       widget.bottomText,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 16.sp,
                         color: Theme.of(context).primaryColor,
                       ),
                       textAlign: TextAlign.center,
@@ -128,7 +129,7 @@ class _AuthBodyState extends State<AuthBody> {
                         widget.bottomTextButton,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           color: Theme.of(context).primaryColor,
                         ),
                         textAlign: TextAlign.center,

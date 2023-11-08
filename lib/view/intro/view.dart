@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_assets.dart';
 import 'package:themar/core/logic/cashed_helper.dart';
 import 'package:themar/core/logic/helper_methods.dart';
@@ -48,13 +49,13 @@ class _SplashViewBodyState extends State<SplashView>
         child: Stack(
           children: [
             PositionedDirectional(
-              bottom: -60,
-              end: 50,
+              bottom: -29.h,
+              end: 60.w,
+              width: 448.w,
+              height: 298.h,
               child: Image.asset(
                 DataAssets.imagesBottomSplash,
-                width: 448,
-                height: 298,
-              ),
+fit: BoxFit.cover,              ),
             ),
               FadeInLeft(
                 child: Spin(

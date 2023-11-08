@@ -5,6 +5,7 @@ class DataAssets {
   static const String imagesLogo = '${image}logo.png';
   static const String imagesBackgroundSplash = '${image}background_splash.png';
   static const String imagesBottomSplash = '${image}bottom_splash.png';
+
   //--network
   static const String networkApple =
       'https://avatars.mds.yandex.net/i?id=4b3c53edc20187bd68b5e15343b998ea99792d71-9289427-images-thumbs&n=13';
@@ -26,8 +27,9 @@ class DataAssets {
   static const String iconPassword = 'assets/icons/lock.png';
   static const String iconUser = 'assets/icons/user.png';
   static const String iconFlag = 'assets/icons/flag.png';
+
   // static const String icon
-   static const String iconHome = 'assets/icons/svg/home.svg';
+  static const String iconHome = 'assets/icons/svg/home.svg';
   static const String iconFavorite = 'assets/icons/svg/favorite.svg';
   static const String iconNotification = 'assets/icons/svg/notification.svg';
   static const String iconMyAccount = 'assets/icons/svg/user.svg';
@@ -35,5 +37,10 @@ class DataAssets {
   static const String iconSearch = 'assets/icons/svg/search.svg';
   static const String iconCart = 'assets/icons/svg/cart.svg';
   static const String iconDelete = 'assets/icons/svg/trash.svg';
-
+  static const String iconBack = 'assets/icons/svg/back.svg';
+  static const String iconBasket = 'assets/icons/svg/basket.svg';
+  static const String iconStar = 'assets/icons/svg/star.svg';
+//---------------------------------------------------------------------------------------
+//--categoriesDetails
+  static const String iconSetting = 'assets/icons/svg/setting.svg';
 }

@@ -1,20 +1,19 @@
 import 'dart:math';
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:themar/core/design/widget/app_input.dart';
 import 'package:themar/core/design/widget/image.dart';
+import 'package:themar/core/design/widget/app_bar_icon.dart';
+import 'package:themar/core/logic/helper_methods.dart';
+import 'package:themar/feature/cart/view.dart';
 import 'package:themar/feature/categories/bloc.dart';
-import 'package:themar/feature/categories/model.dart';
 import 'package:themar/feature/products/bloc.dart';
 import 'package:themar/feature/slider/bloc.dart';
-
 import '../../core/design/unit/app_assets.dart';
 import '../../core/design/unit/app_string.dart';
-import '../../core/design/widget/app_button.dart';
-import '../../feature/products/model.dart';
+
 
 part 'state.dart';
 
@@ -42,7 +41,7 @@ part '../../core/design/widget/order_list.dart';
 class HomeBloc extends Bloc<HomeEvents, HomeState> {
   int _currentIndex = 0;
   final List<Widget> items = [
-     _MainPage(),
+     const _MainPage(),
     _OrderPage(),
     const _NotificationPage(),
     const _MyFavPage(),
@@ -73,8 +72,8 @@ class HomeBloc extends Bloc<HomeEvents, HomeState> {
         (index) => BottomNavigationBarItem(
               icon: SvgPicture.asset(
                 icon[index],
-                height: 20,
-                width: 20,
+                height: 20.h,
+                width: 20.w,
                 color: _currentIndex == index
                     ? Colors.white
                     : const Color(0xffAED489),

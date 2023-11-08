@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_assets.dart';
 import 'package:themar/core/design/unit/app_string.dart';
 import 'package:themar/core/design/widget/app_button.dart';
@@ -10,7 +11,8 @@ import 'package:themar/feature/phone_input/view.dart';
 import 'package:themar/view/auth/forget_password/view.dart';
 import 'package:themar/view/auth/login/bloc.dart';
 
-import 'package:themar/view/auth/register/view.dart';
+
+import '../register/bloc.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -35,7 +37,7 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       //phone number
                       PhoneInput(bloc.phoneController),
-                      const SizedBox(height: 16),
+                       SizedBox(height: 16.h),
                       //password
                       AppInput(
                         autofillHints: const [AutofillHints.password],
@@ -55,7 +57,7 @@ class _LoginViewState extends State<LoginView> {
                         controller: bloc.passwordController,
                         keyboardType: TextInputType.visiblePassword,
                       ),
-                      const SizedBox(height: 20),
+                       SizedBox(height: 20.h),
                       //forget password
                       Align(
                         alignment: AlignmentDirectional.centerEnd,
@@ -63,18 +65,18 @@ class _LoginViewState extends State<LoginView> {
                           onPressed: () {
                             navigateTo(const ForgetPasswordView());
                           },
-                          child: const Text(
+                          child:  Text(
                             DataString.forgetPassword,
                             style: TextStyle(
-                              color: Color(0xff707070),
+                              color: const Color(0xff707070),
                               fontWeight: FontWeight.w300,
-                              fontSize: 16,
+                              fontSize: 16.sp,
                             ),
                             textAlign: TextAlign.end,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                       SizedBox(height: 20.h),
                       //login button
                       BlocBuilder(
                         bloc: bloc,
