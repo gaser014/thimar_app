@@ -29,14 +29,17 @@ class ProductModel {
   late final String code;
   late final int priceBeforeDiscount;
   late final double price;
+  late  double totalPrice;
   late final int discount;
   late final int amount;
+late  int count;
   late final int isActive;
-  late final bool isFavorite;
+  late  bool isFavorite;
   late final Unit unit;
   late final List<Images> images;
   late final String mainImage;
   late final String createdAt;
+late  Widget favoriteIcon ;
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     categoryId = json['category_id'];
@@ -48,13 +51,23 @@ class ProductModel {
     price = json['price']*1.0;
     discount = (json['discount'] * 100).toInt();
     amount = json['amount'];
+    count = json['count']??1;
+    totalPrice = getTotalPrice(count);
     isActive = json['is_active'];
-    isFavorite = json['is_favorite'];
+    isFavorite = json['is_favorite']??false;
+    favoriteIcon=  getFavoriteIcon(isFavorite);
     unit = Unit.fromJson(json['unit']);
     images = List.from(json['images']??[]).map((e) => Images.fromJson(e)).toList();
     mainImage = json['main_image'];
     createdAt = json['created_at'];
   }
+  double getTotalPrice(int count)=>price*count;
+  // Widget get favoriteWid
+Widget getFavoriteIcon(bool isFavorite)=>AppBarIcon(
+  path: DataAssets.iconFavorite,
+  isFavorite:  isFavorite,
+);
+
 }
 
 class Unit {

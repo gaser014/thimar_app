@@ -13,13 +13,14 @@ final  Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return   SafeArea(
-      child: Padding(
+      child: Container(
+        color: Colors.white,
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
             GestureDetector(
               onTap: onTap??() {
-navigateTo(HomeView());
+navigateTo(const HomeView());
               },
               child: const AppBarIcon(),
             ),

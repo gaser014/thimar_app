@@ -5,6 +5,7 @@ class DataAssets {
   static const String imagesLogo = '${image}logo.png';
   static const String imagesBackgroundSplash = '${image}background_splash.png';
   static const String imagesBottomSplash = '${image}bottom_splash.png';
+  static const String imagesBackgroundAccount = '${image}bground_account.png';
 
   //--network
   static const String networkApple =
@@ -29,6 +30,7 @@ class DataAssets {
   static const String iconFlag = 'assets/icons/flag.png';
 
   // static const String icon
+  static const String iconSvg = 'assets/icons/svg/';
   static const String iconHome = 'assets/icons/svg/home.svg';
   static const String iconFavorite = 'assets/icons/svg/favorite.svg';
   static const String iconNotification = 'assets/icons/svg/notification.svg';
@@ -43,4 +45,21 @@ class DataAssets {
 //---------------------------------------------------------------------------------------
 //--categoriesDetails
   static const String iconSetting = 'assets/icons/svg/setting.svg';
+//----------------------------------------------------------------------------------------------
+//--Setting
+  static const String iconWallet = '${icons}wallet.svg';
+  static const String iconLocation = '${icons}location.svg';
+  static const String iconDollar = '${icons}dollar.svg';
+  static const String iconShieldCheck = '${icons}shield_check.svg';
+  static const String iconQuestion = '${icons}question.svg';
+  static const String iconCallCalling = '${icons}call_calling.svg';
+  static const String iconEdit= '${icons}edit.svg';
+  static const String iconShared= '${icons}shared.svg';
+  static const String iconInfo= '${icons}info.svg';
+  static const String iconLanguage= '${icons}language.svg';
+  static const String iconNote= '${icons}note.svg';
+  static const String iconStarAccount= '${icons}star_account.svg';
+  static const String iconTurnOff= '${icons}turn_off.svg';
+  static const String iconArrowLeft= '${icons}arrow_left.svg';
+
 }

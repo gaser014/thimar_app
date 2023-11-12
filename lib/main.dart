@@ -8,6 +8,7 @@ import 'package:themar/feature/cart/bloc.dart';
 import 'package:themar/feature/categories/bloc.dart';
 import 'package:themar/feature/cities/bloc.dart';
 import 'package:themar/feature/phone_input/cubit.dart';
+import 'package:themar/feature/add_to_fav/bloc.dart';
 import 'package:themar/feature/product_details/bloc.dart';
 import 'package:themar/feature/products/bloc.dart';
 import 'package:themar/view/auth/confirm_code/bloc.dart';
@@ -72,6 +73,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<FavBloc>(create: (context) => FavBloc()),
         BlocProvider<CardBloc>(create: (context) => CardBloc()..add(GetCardEvent())),
+        BlocProvider<AddToCardBloc>(create: (context) => AddToCardBloc()),
         BlocProvider<ProductsBloc>(create: (context) => ProductsBloc())
       ],
       child: ScreenUtilInit(

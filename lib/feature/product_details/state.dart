@@ -1,17 +1,13 @@
 part of 'bloc.dart';
 
-class FavState{
+ class AddToCardState {}
+class AddToCardLoadingState extends AddToCardState{}
+class AddToCardSuccessState extends AddToCardState{
 
-}
-class FavLoadingState extends FavState{}
-class FavSuccessState extends FavState{
-  FavSuccessState(){
-
-  }
-
-}
-
-class FavFieldState extends FavState{
+    }
+class AddToCardFieldState extends AddToCardState{
   final String message;
-  FavFieldState({required this.message});
+  AddToCardFieldState({required this.message});
 }
+
+

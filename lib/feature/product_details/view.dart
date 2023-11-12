@@ -1,14 +1,14 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:themar/core/design/unit/app_assets.dart';
 import 'package:themar/core/design/unit/app_string.dart';
+import 'package:themar/core/design/widget/app_counter.dart';
 import 'package:themar/core/design/widget/image.dart';
-import 'package:themar/core/design/widget/app_bar_icon.dart';
+import 'package:themar/feature/add_to_fav/bloc.dart';
+import 'package:themar/feature/product_details/bloc.dart';
 import 'package:themar/feature/products/bloc.dart';
 import 'package:themar/feature/review/bloc.dart';
-import '../../../core/design/unit/app_assets.dart';
-import 'bloc.dart';
 
 class ProductDetailsView extends StatefulWidget {
   final ProductModel model;
@@ -20,111 +20,20 @@ class ProductDetailsView extends StatefulWidget {
 }
 
 class _ProductDetailsViewState extends State<ProductDetailsView> {
-
   @override
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: BottomDetails(widget.model),
+
         body: ListView(
           children: [
-            Stack(
-              children: [
-                widget.model.images.isEmpty
-                    ? ClipRRect(
-                        borderRadius: BorderRadiusDirectional.only(
-                          bottomEnd: Radius.circular(20.r),
-                          bottomStart: Radius.circular(20.r),
-                        ),
-                        child: AppImage(
-                            path: widget.model.mainImage,
-                            width: double.infinity,
-                            height: 322.h,
-                            fit: BoxFit.fill),
-                      )
-                    : CarouselSlider(
-                        items: List.generate(
-                          widget.model.images.length,
-                          (index) => ClipRRect(
-                            borderRadius: BorderRadiusDirectional.only(
-                              bottomEnd: Radius.circular(20.r),
-                              bottomStart: Radius.circular(20.r),
-                            ),
-                            child: AppImage(
-                                path: widget.model.images[index].url,
-                                width: double.infinity,
-                                height: 322.h,
-                                fit: BoxFit.fill),
-                          ),
-                        ),
-                        options: CarouselOptions(
-                          viewportFraction: 1,
-                          height: 164.h,
-                          autoPlay: true,
-                          onPageChanged: (index, reason) {
-                            FavBloc.currentIndex = index;
-                            setState(() {});
-                          },
-                        ),
-                      ),
-                SizedBox(
-                  height: 80,
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.all(16.r),
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          child: const AppBarIcon(),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                        const Spacer(),
-                        Builder(builder: (context) {
-                          final bloc = BlocProvider.of<FavBloc>(context);
-                          bloc.isFav = widget.model.isFavorite;
-                          return BlocBuilder(
-                            bloc: bloc,
-                            builder: (BuildContext context, state) {
-                              return GestureDetector(
-                                child: AppBarIcon(
-                                  path:
-                                      bloc.isFav ? '' : DataAssets.iconFavorite,
-                                  icon: bloc.isFav
-                                      ? Icon(
-                                          Icons.favorite,
-                                          color: Theme.of(context).primaryColor,
-                                        )
-                                      : null,
-                                ),
-                                onTap: () {
-                                  if (bloc.isFav) {
-                                    bloc.add(
-                                      UnFavEvent(
-                                        widget.model.id,
-                                      ),
-                                    );
-                                  } else {
-                                    bloc.add(
-                                      FavEvent(
-                                        widget.model.id,
-                                      ),
-                                    );
-                                  }
-                                },
-                              );
-                            },
-                          );
-                        }),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+         DetailsImageView(model: widget.model),
             Padding(
               padding: EdgeInsetsDirectional.all(16.r),
               child: Column(
@@ -197,62 +106,31 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         ),
                       ),
                       const Spacer(),
-                      Container(
-                        width: 110.h,
-                        height: 36.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          color: const Color(0xff4C8613).withOpacity(.11),
-                        ),
-                        padding: EdgeInsetsDirectional.symmetric(
-                          horizontal: 5.w,
-                          vertical: 3.h,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                              child: Container(
-                                width: 30.w,
-                                height: 30.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  color: Colors.white,
-                                ),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.add,
-                                    color: Theme.of(context).primaryColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Text("1",
-                                style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Theme.of(context).primaryColor,
-                                )),
-                            GestureDetector(
-                              child: Container(
-                                width: 30.w,
-                                height: 30.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.r),
-                                  color: Colors.white,
-                                ),
-                                child: Center(
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.remove,
-                                      color: Theme.of(context).primaryColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
+                      AppCounter(
+                        amount: widget.model.amount,
+                        currentCount: widget.model.count,
+                        decrement: () {
+                          if (widget.model.count > 0) {
+                            widget.model.count--;
+                            widget.model.totalPrice =
+                                widget.model.getTotalPrice(widget.model.count);
+                            debugPrint('*' * 50);
+                            debugPrint(
+                                'Total Price +${widget.model.totalPrice}');
+                          }
+                          setState(() {});
+                        },
+                        increment: () {
+                          if (widget.model.count < widget.model.amount) {
+                            widget.model.count++;
+                            widget.model.totalPrice =
+                                widget.model.getTotalPrice(widget.model.count);
+                            debugPrint('*' * 50);
+                            debugPrint(
+                                'Total Price +${widget.model.totalPrice}');
+                          }
+                          setState(() {});
+                        },
                       ),
                     ],
                   ),
@@ -356,3 +234,65 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   }
 }
 
+class BottomDetails extends StatelessWidget {
+  final ProductModel model;
+  const BottomDetails(this.model, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+   final bloc= BlocProvider.of<AddToCardBloc>(context);
+    return BlocBuilder(
+      bloc: bloc,
+      builder:(context,state)=> InkWell(
+        child: Container(
+            height: 60.h,
+            color: Theme.of(context).primaryColor,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 32.0.r, vertical: 14.0.w),
+              child: Row(
+                children: [
+                  Container(
+                    height: 32.h,
+                    width: 36.w,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff6AA431),
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: const AppImage(
+                      path: DataAssets.iconBasket,
+                      color: Colors.white,
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10.0.w,
+                  ),
+                  Text(
+                    DataString.addToCart,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacer(),
+                  Text(
+                    "${model.totalPrice} ر.س",
+                    style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            )),
+        onTap: () {
+          bloc.add(AddToCardEvent(
+            model: model,
+          ));
+        },
+      ),
+    );
+  }
+}

@@ -6,7 +6,7 @@ import 'package:themar/core/design/widget/image.dart';
 
 class AppInput extends StatefulWidget {
   final String label;
-  final String image;
+  final String? image;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final TextInputType keyboardType;
@@ -22,7 +22,7 @@ class AppInput extends StatefulWidget {
     Key? key,
     this.onChanged,
     required this.label,
-    required this.image,
+     this.image,
     required this.validator,
     required this.controller,
     this.isEnable = true,
@@ -96,10 +96,10 @@ class _AppInputState extends State<AppInput> {
                   },
                 )
               : widget.suffixIcon,
-          prefixIcon: Padding(
+          prefixIcon: (widget.image?.isNotEmpty??true)? null:Padding(
               padding: EdgeInsets.all(16.0.r),
               child: AppImage(
-                path: widget.image,
+                path: widget.image!,
                 width: 20.w,
                 height: 20.h,
                 fit: BoxFit.scaleDown,

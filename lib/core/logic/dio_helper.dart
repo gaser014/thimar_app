@@ -21,6 +21,7 @@ class DioHelper {
         )
       );
       debugPrint('$endPoint is Success ${response.data}');
+      debugPrint(' ${response.data?['message']}');
       debugPrint('state code is ${response.statusCode}');
       return CustomResponse(
         response: response,

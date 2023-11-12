@@ -2,7 +2,7 @@
   echo "# thimar_app" >> README.md
 git init
  git add .
-git commit -m "first commit"
+git commit -m "Second commit"
 git branch -M main
 git remote add origin https://github.com/gaser014/thimar_app.git
 git push -u origin main

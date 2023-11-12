@@ -1,3 +1,4 @@
+
 class DataString {
 //==============================================================================
 // order view
@@ -23,6 +24,12 @@ static const String haveAccount = "لديك حساب بالفعل؟";
   static const String login = 'تسجيل الدخول';
 
   static const String passwordError = 'كلمة المرور غير صحيحة';
+
+
+
+
+
+
 
 
 
@@ -81,11 +88,22 @@ static const String  relatedProducts='منتجات مشابهة';
 static const String  showAll='عرض الكل';
 static const String  addToCard='إضافة إلي السلة';
 static const String  noReview='لا يوجد تقييمات';
+static const String  addToCart='إضافة إلي السلة';
 //--------------------------------------------------------------------------------
 //favorite view
 static const String  myFav='المفضلة';
 //--------------------------------------------------------------------------------
 //cart view
 static const String  myCart='السلة';
+  static const String vipMessage= 'جميع الأسعار تشمل قيمة الضريبة المضافة 15%';
+  static const String  total='الإجمالي';
+  static const String totalPriceBeforeDiscount='إجمالي المنتجات';
+  static const String totalDiscount='الخصم';
+  static const String vat='الضريبة';
+  static const String totalCard='المجموع';
+  static const String finishedCard ='الانتقال لإتمام الطلب';
+  static const String haveCoupon = 'عندك كوبون ؟';
+  static const String enterCoupon='من فضلك ادخل الكوبون';
+  static const String apply= 'تطبيق';
 
 }

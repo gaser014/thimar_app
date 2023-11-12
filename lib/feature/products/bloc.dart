@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:themar/core/design/unit/app_assets.dart';
+import 'package:themar/core/design/widget/app_bar_icon.dart';
 import 'package:themar/core/design/widget/app_grid.dart';
 import 'package:themar/core/logic/helper_methods.dart';
 import 'package:themar/feature/product_details/view.dart';
