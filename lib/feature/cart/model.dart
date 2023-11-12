@@ -1,10 +1,10 @@
 part of 'bloc.dart';
 
 class CardData {
-  late final List<CardModel> list;
-  late final double totalPriceBeforeDiscount;
-  late final double totalDiscount;
-  late final double totalPriceWithVat;
+  late  List<CardModel> list;
+  late  double totalPriceBeforeDiscount;
+  late  double totalDiscount;
+  late  double totalPriceWithVat;
   late final double deliveryCost;
   late final double freeDeliveryPrice;
   late final double vat;
@@ -20,7 +20,7 @@ class CardData {
         .map((e) => CardModel.fromJson(e))
         .toList();
     totalPriceBeforeDiscount = json['total_price_before_discount']*1.0;
-    totalDiscount = json['total_discount']*-1.0;
+    totalDiscount = json['total_discount']*1.0;
     totalPriceWithVat = json['total_price_with_vat']*1.0;
     deliveryCost = json['delivery_cost']*1.0;
     freeDeliveryPrice = json['free_delivery_price']*1.0;
@@ -58,16 +58,36 @@ class CardData {
     vipMessage = json['vip_message'] ?? '';
     status = json['status'];
   }
-}
+deleteCard(int index){
+
+    totalPriceBeforeDiscount = totalPriceBeforeDiscount -
+        (list[index].priceBeforeDiscount * list[index].amount);
+    totalPriceWithVat = totalPriceWithVat -list[index].price;
+    totalDiscount =totalPriceBeforeDiscount - totalPriceWithVat;
+  list.removeAt(index);
+
+  }
+  upDateCard(int index, double price, int amount) {
+    totalPriceBeforeDiscount = totalPriceBeforeDiscount + price;
+
+    totalPriceWithVat = totalPriceWithVat + price;
+    totalDiscount =totalPriceBeforeDiscount - totalPriceWithVat;
+    list[index].price = list[index].priceBeforeDiscount;
+    list[index].amount =amount ;
+  }
+
+  }
+
+
 
 class CardModel {
   late final int id;
   late final String title;
   late final String image;
-  late final int amount;
-  late final int priceBeforeDiscount;
-  late final int discount;
-  late final double price;
+  late  int amount;
+  late  double priceBeforeDiscount;
+  late  double discount;
+  late  double price;
   late final int remainingAmount;
 
   CardModel.fromJson(Map<String, dynamic> json) {
@@ -75,8 +95,8 @@ class CardModel {
     title = json['title'];
     image = json['image'];
     amount = json['amount'];
-    priceBeforeDiscount = json['price_before_discount'];
-    discount = json['discount'];
+    priceBeforeDiscount = json['price_before_discount']*1.0;
+    discount = json['discount']*1.0;
     price = json['price']*amount*1.0;
     remainingAmount = json['remaining_amount'];
   }

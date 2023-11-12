@@ -13,21 +13,15 @@ import 'package:themar/feature/cart/bloc.dart';
 import '../../core/design/widget/app_bar_icon.dart';
 
 class CartView extends StatefulWidget {
-  final CardData model;
+  CardData model;
 
-  const CartView(this.model, {Key? key}) : super(key: key);
+  CartView(this.model, {Key? key}) : super(key: key);
 
   @override
   State<CartView> createState() => _CartViewState();
 }
 
 class _CartViewState extends State<CartView> {
-  @override
-  initState() {
-    super.initState();
-    BlocProvider.of<CardBloc>(context).add(GetCardEvent());
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +32,39 @@ class _CartViewState extends State<CartView> {
         padding: EdgeInsets.all(16.0.r),
         child: ListView(
           children: [
-            ...List.generate(
-              widget.model.list.isEmpty ? 0 : widget.model.list.length,
-              (index) => CardItems(
-                model: widget.model.list[index],
-              ),
-            ),
+            widget.model.list.isEmpty
+                ? const SizedBox()
+                : Builder(builder: (context) {
+                    final bloc = BlocProvider.of<CardBloc>(context);
+                    return BlocBuilder(
+                        bloc: bloc,
+                        builder: (context, state) => ListView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              children: List.generate(
+                                widget.model.list.length,
+                                (index) => CardItems(
+                                  model: widget.model,
+                                  index: index,
+                                  onTap: () {
+                                    print('*' * 50);
+                                    print(widget.model.list.length);
+                                    print('delete');
+                                    if (state is! DeleteCardLoadingState) {
+                                      bloc.add(DeleteCardEvent(
+                                          model: widget.model, index: index));
+                                      print(index);
+
+                                      if (state is CardSuccessState) {
+                                        widget.model = state.model;
+                                        setState(() {});
+                                      }
+                                    }
+                                  },
+                                ),
+                              ),
+                            ));
+                  }),
             SizedBox(height: 12.h),
             Container(
               height: 56.h,
@@ -144,6 +165,7 @@ class _CartBadgeViewState extends State<CartBadgeView> {
     BlocProvider.of<CardBloc>(context).add(GetCardEvent());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CardBloc, CardState>(
@@ -186,11 +208,19 @@ class _CartBadgeViewState extends State<CartBadgeView> {
   }
 }
 
-class CardItems extends StatelessWidget {
-  final CardModel model;
+class CardItems extends StatefulWidget {
+  final CardData model;
+  final int index;
+  final void Function()? onTap;
 
-  const CardItems({Key? key, required this.model}) : super(key: key);
+  const CardItems({Key? key, required this.model, required this.onTap, required this.index })
+      : super(key: key);
 
+  @override
+  State<CardItems> createState() => _CardItemsState();
+}
+
+class _CardItemsState extends State<CardItems> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -213,7 +243,7 @@ class CardItems extends StatelessWidget {
           child: Row(
             children: [
               AppImage(
-                  path: model.image,
+                  path: widget.model.list[widget.index].image,
                   width: 92.w,
                   height: 78.h,
                   fit: BoxFit.cover),
@@ -221,12 +251,12 @@ class CardItems extends StatelessWidget {
               Column(
                 children: [
                   Text.rich(
-                    TextSpan(text: model.title, children: [
+                    TextSpan(text: widget.model.list[widget.index].title, children: [
                       const TextSpan(
                         text: '\n',
                       ),
                       TextSpan(
-                        text: "${model.price} ر.س",
+                        text: "${widget.model.list[widget.index].price} ر.س",
                         style: TextStyle(
                           fontSize: 13.sp,
                         ),
@@ -241,15 +271,60 @@ class CardItems extends StatelessWidget {
                   Transform.scale(
                     scaleX: 72 / 110,
                     scaleY: 28 / 36,
-                    child: AppCounter(
-                        amount: model.remainingAmount,
-                        currentCount: model.amount),
+                    child: Builder(
+                      builder: (context) {
+                        final bloc = BlocProvider.of<CardBloc>(context);
+                        return BlocBuilder(
+                          bloc: bloc,
+                          builder:(context, state)
+                              {
+                                if(state is CardSuccessState) {
+                                  return  AppCounter(
+                                    amount: state.model.list[widget.index].remainingAmount,
+                                    currentCount: state.model.list[widget.index].amount,
+                                    decrement: () {
+                                      if (state.model.list[widget.index].amount > 1) {
+
+                                        if(state is ! UpDateCardLoadingState) {
+                                          bloc.add(
+                                            UpDateCardEvent(
+                                              model: state.model,
+                                              index: widget.index,
+                                              isAdd: false,
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    },
+                                    increment: () {
+                                      if (state.model.list[widget.index].amount <state.model.list[widget.index].remainingAmount ) {
+
+                                        if(state is ! UpDateCardLoadingState) {
+                                          bloc.add(
+                                            UpDateCardEvent(
+                                              model: widget.model,
+                                              index: widget.index,
+                                              isAdd: true,
+                                            ),
+                                          );
+                                        }
+                                      }
+
+                                    },
+                                  );
+                                }
+                                return Container();
+                              },
+
+                        );
+                      }
+                    ),
                   ),
                 ],
               ),
               const Spacer(),
               GestureDetector(
-                onTap: () {},
+                onTap: widget.onTap,
                 child: Container(
                   width: 32.w,
                   height: 32.h,
@@ -279,7 +354,6 @@ class BottomCard extends StatelessWidget {
 
   const BottomCard({Key? key, required this.model}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -295,87 +369,104 @@ class BottomCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(13.r),
               color: const Color(0xffF3F8EE),
             ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(9.0.r),
-                  child: Row(
-                    children: [
-                      Text(
-                        DataString.totalPriceBeforeDiscount,
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                      const Spacer(),
-                      Text(
-                        '${model.totalPriceBeforeDiscount} ر.س',
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                model.vatWidget,
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 9.0.w),
-                  child: Row(
-                    children: [
-                      Text(
-                        DataString.totalDiscount,
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                      const Spacer(),
-                      Text(
-                        '${model.totalDiscount} ر.س',
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 9.0.w),
-                  child: const Divider(),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(9.0.r),
-                  child: Row(
-                    children: [
-                      Text(
-                        DataString.totalCard,
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                      const Spacer(),
-                      Text(
-                        '${model.totalPriceWithVat} ر.س',
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            child: Builder(builder: (context) {
+              final bloc = BlocProvider.of<CardBloc>(context);
+              return BlocBuilder(
+                  bloc: bloc,
+                  builder: (context, state) {
+                    if (state is CardSuccessState) {
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(9.0.r),
+                            child: Row(
+                              children: [
+                                Text(
+                                  DataString.totalPriceBeforeDiscount,
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Text(
+                                  '${state.model.totalPriceBeforeDiscount} ر.س',
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          state.model.vatWidget,
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 9.0.w),
+                            child: Row(
+                              children: [
+                                Text(
+                                  DataString.totalDiscount,
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Text(
+                                  '${state.model.totalDiscount * -1} ر.س',
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 9.0.w),
+                            child: const Divider(),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(9.0.r),
+                            child: Row(
+                              children: [
+                                Text(
+                                  DataString.totalCard,
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Text(
+                                  '${state.model.totalPriceWithVat} ر.س',
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    } else if (state is DeleteCardLoadingState) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is DeleteCardFieldState) {
+                      return const Text('Network Error');
+                    } else {
+                      return const SizedBox();
+                    }
+                  });
+            }),
           ),
           SizedBox(height: 16.h),
           SizedBox(

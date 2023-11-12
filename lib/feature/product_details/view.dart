@@ -30,7 +30,6 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: BottomDetails(widget.model),
-
         body: ListView(
           children: [
          DetailsImageView(model: widget.model),
@@ -110,7 +109,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                         amount: widget.model.amount,
                         currentCount: widget.model.count,
                         decrement: () {
-                          if (widget.model.count > 0) {
+                          if (widget.model.count >1) {
                             widget.model.count--;
                             widget.model.totalPrice =
                                 widget.model.getTotalPrice(widget.model.count);
