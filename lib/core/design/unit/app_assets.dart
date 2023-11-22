@@ -47,19 +47,19 @@ class DataAssets {
   static const String iconSetting = 'assets/icons/svg/setting.svg';
 //----------------------------------------------------------------------------------------------
 //--Setting
-  static const String iconWallet = '${icons}wallet.svg';
-  static const String iconLocation = '${icons}location.svg';
-  static const String iconDollar = '${icons}dollar.svg';
-  static const String iconShieldCheck = '${icons}shield_check.svg';
-  static const String iconQuestion = '${icons}question.svg';
-  static const String iconCallCalling = '${icons}call_calling.svg';
-  static const String iconEdit= '${icons}edit.svg';
-  static const String iconShared= '${icons}shared.svg';
-  static const String iconInfo= '${icons}info.svg';
-  static const String iconLanguage= '${icons}language.svg';
-  static const String iconNote= '${icons}note.svg';
-  static const String iconStarAccount= '${icons}star_account.svg';
-  static const String iconTurnOff= '${icons}turn_off.svg';
-  static const String iconArrowLeft= '${icons}arrow_left.svg';
+  static const String iconWallet = '${iconSvg}wallet.svg';
+  static const String iconLocation = '${iconSvg}location.svg';
+  static const String iconDollar = '${iconSvg}dollar.svg';
+  static const String iconShieldCheck = '${iconSvg}shield_check.svg';
+  static const String iconQuestion = '${iconSvg}question.svg';
+  static const String iconCallCalling = '${iconSvg}call_calling.svg';
+  static const String iconEdit= '${iconSvg}edit.svg';
+  static const String iconShared= '${iconSvg}shared.svg';
+  static const String iconInfo= '${iconSvg}info.svg';
+  static const String iconLanguage= '${iconSvg}language.svg';
+  static const String iconNote= '${iconSvg}note.svg';
+  static const String iconStarAccount= '${iconSvg}star_account.svg';
+  static const String iconTurnOff= '${iconSvg}turn_off.svg';
+  static const String iconArrowLeft= '${iconSvg}arrow_left.svg';
 
 }

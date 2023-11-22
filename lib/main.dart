@@ -1,93 +1,122 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/logic/cashed_helper.dart';
 import 'package:themar/core/logic/helper_methods.dart';
-import 'package:themar/feature/cart/bloc.dart';
-import 'package:themar/feature/categories/bloc.dart';
-import 'package:themar/feature/cities/bloc.dart';
-import 'package:themar/feature/phone_input/cubit.dart';
-import 'package:themar/feature/add_to_fav/bloc.dart';
-import 'package:themar/feature/product_details/bloc.dart';
-import 'package:themar/feature/products/bloc.dart';
-import 'package:themar/view/auth/confirm_code/bloc.dart';
-import 'package:themar/view/auth/register/bloc.dart';
-import 'package:themar/view/auth/reset_password/bloc.dart';
-import 'package:themar/view/home/bloc.dart';
-import 'package:themar/feature/slider/bloc.dart';
-import 'package:themar/view/intro/view.dart';
-import 'view/auth/forget_password/bloc.dart';
-import 'view/auth/login/bloc.dart';
+import 'package:themar/features/add_to_fav/bloc.dart';
+import 'package:themar/features/auth/confirm_code/bloc.dart';
+import 'package:themar/features/cart/bloc.dart';
+import 'package:themar/features/my_account/bloc.dart';
+import 'package:themar/features/products/bloc.dart';
+import 'package:themar/features/review/bloc.dart';
+import 'package:themar/views/splash/view.dart';
 
-void main() {
+import 'core/logic/bloc_observer.dart';
+import 'core/logic/get_it.dart';
+import 'features/add_to_card/bloc.dart';
+import 'features/auth/cities/bloc.dart';
+import 'features/auth/forget_password/bloc.dart';
+import 'features/auth/login/bloc.dart';
+import 'features/auth/register/bloc.dart';
+import 'features/auth/reset_password/bloc.dart';
+import 'features/categories/bloc.dart';
+import 'features/localization/locale_cubit.dart';
+import 'features/slider/bloc.dart';
+
+void main()async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await EasyLocalization.ensureInitialized();
+
   CachedHelper.init();
+  getItServices();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Color(0xFF4C8613),
     ),
   );
-  runApp(const MyApp());
+  Bloc.observer = AppBlocObserver();
+  runApp(EasyLocalization(
+  supportedLocales:const [
+   Locale('en' ),
+   Locale('ar' ),
+
+  ],
+      fallbackLocale: const Locale('en'),
+      startLocale: const Locale('en'),
+      saveLocale: true,
+      useOnlyLangCode: true,
+
+
+  path: 'assets/lang',
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<LoginBloc>(
-          create: (context) => LoginBloc(),
-        ),
-        BlocProvider<PhoneInputCubit>(
-          create: (context) => PhoneInputCubit(),
-        ),
-        BlocProvider<RegisterBloc>(
-          create: (context) => RegisterBloc(),
-        ),
-        BlocProvider<CitiesBloc>(
-            create: (context) => CitiesBloc()),
-        BlocProvider<ConfirmBloc>(
-            create: (context) => ConfirmBloc()..add(TimerEvent())),
-        BlocProvider<ForgetPasswordBloc>(
-            create: (context) => ForgetPasswordBloc()),
-        BlocProvider<ResetPasswordBloc>(
-            create: (context) => ResetPasswordBloc()),
-        BlocProvider<HomeBloc>(
-          create: (context) => HomeBloc(),
-        ),
-        BlocProvider<SliderBloc>(
-          create: (context) => SliderBloc()
-            ..add(
-              SliderEvent(),
-            ),
-        ),
-        BlocProvider<CategoriesBloc>(
-          create: (context) => CategoriesBloc()
-            ..add(
-              CategoriesEvent(),
-            ),
-        ),
-        BlocProvider<FavBloc>(create: (context) => FavBloc()),
-        BlocProvider<CardBloc>(create: (context) => CardBloc()..add(GetCardEvent())),
-        BlocProvider<AddToCardBloc>(create: (context) => AddToCardBloc()),
-        BlocProvider<ProductsBloc>(create: (context) => ProductsBloc())
-      ],
+        BlocProvider(create: (context) => getIt<LocaleCubit>()),
+
+//----------------------Auth---------------------
+
+        BlocProvider(create: (context) => getIt<LoginBloc>()),
+        BlocProvider(create: (context) => getIt<RegisterBloc>()),
+        BlocProvider(
+            create: (context) =>
+                getIt.get<CitiesBloc>()..add(GetCitiesEvent())),
+        BlocProvider(
+            create: (context) => getIt<ConfirmBloc>()..add(TimerEvent())),
+        BlocProvider(create: (context) => getIt<ForgetPasswordBloc>()),
+        BlocProvider(create: (context) => getIt<ResetPasswordBloc>()),
+//=====================================================================================
+        BlocProvider(
+            create: (context) => getIt<SliderBloc>()..add(SliderEvent())),
+        BlocProvider(
+            create: (context) =>
+                getIt<CategoriesBloc>()..add(CategoriesEvent())),
+        BlocProvider(create: (context) => getIt<ReviewsBloc>()),
+
+        BlocProvider(create: (context) => getIt<FavBloc>()),
+        BlocProvider(create: (context) => getIt<CardBloc>()),
+        BlocProvider(create: (context) => getIt<AddToCardBloc>()),
+        BlocProvider(create: (context) => getIt<ProductsBloc>()),
+//---------------------------------------------------------------------------
+  //---setting-----
+    BlocProvider(create: (context) => getIt<MyAccountBloc>()),
+
+    ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
+
         splitScreenMode: true,
         child: MaterialApp(
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales:const[ Locale('en', ), Locale('ar', )],
+          locale: context.locale,
+          localeResolutionCallback: (deviceLocale, supportedLocales) {
+            for (var locale in supportedLocales) {
+              if (deviceLocale != null &&
+                  deviceLocale.languageCode == locale.languageCode) {
+                return deviceLocale;
+              }
+            }
+
+            return supportedLocales.first;
+          },
+
           navigatorKey: navigatorKey,
           title: 'Thimar',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            // CircularProgressIndicatorThemeData(
-            //   color: const Color(0xFF4C8613),
-            // ),
+            fontFamily: 'Tajawal',
+
             progressIndicatorTheme: const ProgressIndicatorThemeData(
               color: Color(0xFF4C8613),
             ),
@@ -159,31 +188,14 @@ class MyApp extends StatelessWidget {
             primarySwatch: primarySwatch(),
             useMaterial3: true,
           ),
-          builder: (context, child) =>
-              Directionality(textDirection: TextDirection.rtl, child: child!),
+          // builder: (context, child) =>
+          //     Directionality(textDirection: TextDirection.rtl, child: child!),
           home: const SplashView(),
           themeMode: ThemeMode.light,
         ),
       ),
     );
   }
-
-  MaterialColor? primarySwatch() {
-    Color color = const Color(0xFF4C8613);
-    return MaterialColor(color.value, {
-      50: color.withOpacity(0.1),
-      100: color.withOpacity(0.2),
-      200: color.withOpacity(0.3),
-      300: color.withOpacity(0.4),
-      400: color.withOpacity(0.5),
-      500: color.withOpacity(0.6),
-      600: color.withOpacity(0.7),
-      700: color.withOpacity(0.8),
-      800: color.withOpacity(0.9),
-      900: color.withOpacity(1.0),
-    });
-  }
 }
-
 
 // flutter build apk --no-tree-shake-icons

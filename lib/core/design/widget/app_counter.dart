@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -58,7 +59,7 @@ class _AppCounterState extends State<AppCounter> {
               ),
             ),
           ),
-          Text(widget.currentCount.toString(),
+          Text(widget.currentCount.toString().tr(),
               style: TextStyle(
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w500,
@@ -72,16 +73,16 @@ class _AppCounterState extends State<AppCounter> {
               height: 30.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.r),
-                color: widget.currentCount <= 0
-                    ? Colors.transparent
-                    : Colors.white,
+                color: widget.currentCount >1
+                    ? Colors.white
+                    : Colors.transparent,
               ),
               child: Center(
                 child: Icon(
                   Icons.remove,
-                  color: widget.currentCount <= 0
-                      ? Colors.grey
-                      : Theme.of(context).primaryColor,
+                  color: widget.currentCount >1
+                      ? Theme.of(context).primaryColor
+                      :  Colors.grey,
                 ),
               ),
             ),

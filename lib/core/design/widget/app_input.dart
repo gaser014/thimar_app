@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/widget/image.dart';
@@ -22,7 +23,7 @@ class AppInput extends StatefulWidget {
     Key? key,
     this.onChanged,
     required this.label,
-     this.image,
+    this.image,
     required this.validator,
     required this.controller,
     this.isEnable = true,
@@ -62,21 +63,21 @@ class _AppInputState extends State<AppInput> {
         keyboardType: widget.keyboardType,
         onChanged: (value) {
           if (_debounce?.isActive ?? false) _debounce!.cancel();
-          _debounce = Timer(Duration(seconds: 1), () {
-            widget.onChanged!(value);
+          _debounce = Timer(const Duration(seconds: 1), () {
+            if (widget.onChanged != null) {
+              widget.onChanged!(value);
+            }
           });
-
-
         },
         enabled: widget.isEnable,
         decoration: InputDecoration(
           filled: widget.isFilled,
           fillColor: const Color(0xff4C8613).withOpacity(.08),
-          hintText: widget.label,
+          hintText: widget.label.tr(),
           hintStyle: widget.isFilled
               ? TextStyle(
                   fontSize: 15.sp,
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w200,
                   color: const Color(0xffB9C9A8),
                 )
               : TextStyle(
@@ -96,14 +97,16 @@ class _AppInputState extends State<AppInput> {
                   },
                 )
               : widget.suffixIcon,
-          prefixIcon: (widget.image?.isNotEmpty??true)? null:Padding(
-              padding: EdgeInsets.all(16.0.r),
-              child: AppImage(
-                path: widget.image!,
-                width: 20.w,
-                height: 20.h,
-                fit: BoxFit.scaleDown,
-              )),
+          prefixIcon: (widget.image?.isNotEmpty ?? true)
+              ? null
+              : Padding(
+                  padding: EdgeInsets.all(16.0.r),
+                  child: AppImage(
+                    path: widget.image!,
+                    width: 20.w,
+                    height: 20.h,
+                    fit: BoxFit.scaleDown,
+                  )),
         ),
       ),
     );

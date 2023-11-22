@@ -11,13 +11,20 @@ class DioHelper {
   );
   Future<CustomResponse> sendData(
       {required String endPoint, Map<String, dynamic>? data,bool haveToken=false}) async {
+    Map<String, dynamic>? headers={
+      "Accept":"application/json",
+      "Accept-Language":    CachedHelper. getCachedLanguageCode()
 
+    };
+    if(haveToken){
+      headers.addAll({
+        "Authorization": "Bearer ${CachedHelper.getToken()}",
+      });
+    }
     try {
       final response = await dio.post(endPoint, data: data,
         options: Options(
-          headers: haveToken?{
-            "Authorization": "Bearer ${CachedHelper.getToken()}",
-            }:null,
+          headers: headers,
         )
       );
       debugPrint('$endPoint is Success ${response.data}');
@@ -42,13 +49,20 @@ class DioHelper {
   }
   Future<CustomResponse> upDateData(
       {required String endPoint, Map<String, dynamic>? data,bool haveToken=false}) async {
+    Map<String, dynamic>? headers={
+      "Accept":"application/json",
+      "Accept-Language":    CachedHelper. getCachedLanguageCode()
 
+    };
+    if(haveToken){
+      headers.addAll({
+        "Authorization": "Bearer ${CachedHelper.getToken()}",
+      });
+    }
     try {
       final response = await dio.put(endPoint, data: data,
         options: Options(
-          headers: haveToken?{
-            "Authorization": "Bearer ${CachedHelper.getToken()}",
-            }:null,
+          headers: headers,
         )
       );
       debugPrint('$endPoint is Success ${response.data}');
@@ -74,12 +88,21 @@ class DioHelper {
 
   Future<CustomResponse> getData(
       {required String endPoint, Map<String, dynamic>? data,bool haveToken=false}) async {
+    Map<String, dynamic>? headers=
+    {
+      "Accept":"application/json",
+      "Accept-Language":    CachedHelper. getCachedLanguageCode()
+
+    };
+    if(haveToken){
+      headers.addAll({
+        "Authorization": "Bearer ${CachedHelper.getToken()}",
+      });
+    }
     try {
       final response = await dio.get(endPoint, queryParameters: data,
         options: Options(
-          headers: haveToken?{
-            "Authorization": "Bearer ${CachedHelper.getToken()}",
-          }:null,
+          headers: headers,
         ),);
       debugPrint('$endPoint is Success ${response.data}');
       debugPrint('*' * 50);
@@ -101,12 +124,20 @@ class DioHelper {
 
   Future<CustomResponse> deleteData(
       {required String endPoint, Map<String, dynamic>? data,bool haveToken=false}) async {
+    Map<String, dynamic>? headers={
+      "Accept":"application/json",
+      "Accept-Language":    CachedHelper. getCachedLanguageCode()
+
+    };
+    if(haveToken){
+      headers.addAll({
+        "Authorization": "Bearer ${CachedHelper.getToken()}",
+      });
+    }
     try {
       final response = await dio.delete(endPoint, queryParameters: data,
         options: Options(
-          headers: haveToken?{
-            "Authorization": "Bearer ${CachedHelper.getToken()}",
-          }:null,
+          headers: headers,
         ),);
       debugPrint('$endPoint is Success ${response.data}');
       debugPrint('*' * 50);

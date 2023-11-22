@@ -1,6 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-var navigatorKey = GlobalKey<NavigatorState>();
+final navigatorKey = GlobalKey<NavigatorState>();
 
 void navigateTo(Widget page,{bool removeHistory = false}) {
   Navigator.pushAndRemoveUntil(
@@ -30,8 +31,12 @@ void showMessage({
   if (message.isNotEmpty) {
     ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
       SnackBar(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 8,
+        ),
         content: Text(
-          message,
+          message.tr(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
@@ -48,4 +53,19 @@ void showMessage({
       ),
     );
   }
+}
+MaterialColor? primarySwatch() {
+  Color color = const Color(0xFF4C8613);
+  return MaterialColor(color.value, {
+    50: color.withOpacity(0.1),
+    100: color.withOpacity(0.2),
+    200: color.withOpacity(0.3),
+    300: color.withOpacity(0.4),
+    400: color.withOpacity(0.5),
+    500: color.withOpacity(0.6),
+    600: color.withOpacity(0.7),
+    700: color.withOpacity(0.8),
+    800: color.withOpacity(0.9),
+    900: color.withOpacity(1.0),
+  });
 }
