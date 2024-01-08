@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_string.dart';
-import 'package:themar/features/localization/app_localizations.dart';
 import '../../../features/auth/cities/bloc.dart';
 import '../../../features/auth/cities/model.dart';
 

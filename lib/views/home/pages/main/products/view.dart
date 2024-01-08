@@ -9,7 +9,7 @@ import 'package:themar/views/home/pages/main/products/product_details/view.dart'
 
 import '../../../../../core/design/unit/app_string.dart';
 import '../../../../../core/design/widget/app_grid.dart';
-import '../../../../../core/design/widget/image.dart';
+import '../../../../../core/design/widget/app_image.dart';
 import '../../../../../core/logic/get_it.dart';
 import '../../../../../features/add_to_card/bloc.dart';
 
@@ -217,7 +217,8 @@ class _ItemProductState extends State<ItemProduct> {
                         color: Theme.of(context).primaryColor,
                       ),
                       TextSpan(
-                        text: "${widget.model.price} ${DataString.currency.tr()} ",
+                        text:
+                            "${widget.model.price} ${DataString.currency.tr()} ",
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
@@ -225,7 +226,8 @@ class _ItemProductState extends State<ItemProduct> {
                         children: [
                           const TextSpan(text: " "),
                           TextSpan(
-                            text: "${widget.model.priceBeforeDiscount} ${DataString.currency.tr()}",
+                            text:
+                                "${widget.model.priceBeforeDiscount} ${DataString.currency.tr()}",
                             style: TextStyle(
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w300,
@@ -252,11 +254,9 @@ class _ItemProductState extends State<ItemProduct> {
                           GetCardEvent(massage: 'Hello from product view'),
                         );
                         state.isGetCard = false;
-
                       }
                     },
                     bloc: bloc,
-
                     builder: (context, state) => GestureDetector(
                       onTap: () {
                         if (state is! AddToCardLoadingState &&
@@ -284,11 +284,12 @@ class _ItemProductState extends State<ItemProduct> {
                           borderRadius: BorderRadius.circular(9),
                         ),
                         child: Center(
-                          child: (state is AddToCardLoadingState && widget.model.id == state.id)
+                          child: (state is AddToCardLoadingState &&
+                                  widget.model.id == state.id)
                               ? const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: LinearProgressIndicator(),
-                              )
+                                  padding: EdgeInsets.all(8.0),
+                                  child: LinearProgressIndicator(),
+                                )
                               : Text(
                                   DataString.add.tr(),
                                   style: TextStyle(

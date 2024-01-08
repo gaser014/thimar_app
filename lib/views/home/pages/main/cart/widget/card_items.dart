@@ -6,11 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/design/unit/app_assets.dart';
 import '../../../../../../core/design/unit/app_string.dart';
 import '../../../../../../core/design/widget/app_counter.dart';
-import '../../../../../../core/design/widget/image.dart';
+import '../../../../../../core/design/widget/app_image.dart';
 import '../../../../../../core/logic/get_it.dart';
 import '../../../../../../features/cart/bloc.dart';
 import '../../../../../../features/cart/model.dart';
 
+//ignore: must_be_immutable
 class CardItems extends StatefulWidget {
   CardData model;
 

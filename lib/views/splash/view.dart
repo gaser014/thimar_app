@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_assets.dart';
-import 'package:themar/core/design/widget/image.dart';
+import 'package:themar/core/design/widget/app_image.dart';
 import 'package:themar/core/logic/cashed_helper.dart';
 import 'package:themar/core/logic/helper_methods.dart';
 import 'package:themar/views/home/view.dart';
@@ -56,9 +56,9 @@ class _SplashViewBodyState extends State<SplashView>
               width: 448.w,
               height: 298.h,
               child: Transform.flip(
-                flipX:context.locale==const Locale('en'),
+                flipX: context.locale == const Locale('en'),
                 child: const AppImage(
-                path:  DataAssets.imagesBottomSplash,
+                  path: DataAssets.imagesBottomSplash,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -70,7 +70,7 @@ class _SplashViewBodyState extends State<SplashView>
                   delay: const Duration(milliseconds: 500),
                   child: const Center(
                     child: AppImage(
-                    path:   DataAssets.imagesLogo,
+                      path: DataAssets.imagesLogo,
                       width: 160,
                       height: 160,
                       fit: BoxFit.fill,

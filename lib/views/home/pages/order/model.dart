@@ -8,7 +8,8 @@ class OrderModel {
   late final StateOrder state;
   final _list = StateOrder()._listOfState();
   late final List<Items> items;
-  late final String date="${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}";
+  late final String date =
+      "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}";
   OrderModel();
   OrderModel.map({
     required this.id,
@@ -17,52 +18,52 @@ class OrderModel {
   });
 
   List<OrderModel> list() => [
-    OrderModel.map(
+        OrderModel.map(
           id: Random().nextInt(10000).toString(),
           state: _list[Random().nextInt(_list.length)],
           items: Items().listItems,
         ),
-    OrderModel.map(
+        OrderModel.map(
           id: Random().nextInt(10000).toString(),
           state: _list[Random().nextInt(_list.length)],
           items: Items().listItems,
         ),
-    OrderModel.map(
+        OrderModel.map(
           id: Random().nextInt(10000).toString(),
           state: _list[Random().nextInt(_list.length)],
           items: Items().listItems,
         ),
-    OrderModel.map(
+        OrderModel.map(
           id: Random().nextInt(10000).toString(),
           state: _list[Random().nextInt(_list.length)],
           items: Items().listItems,
         ),
-    OrderModel.map(
+        OrderModel.map(
           id: Random().nextInt(10000).toString(),
           state: _list[Random().nextInt(_list.length)],
           items: Items().listItems,
         ),
-    OrderModel.map(
+        OrderModel.map(
           id: Random().nextInt(10000).toString(),
           state: _list[Random().nextInt(_list.length)],
           items: Items().listItems,
         ),
-    OrderModel.map(
+        OrderModel.map(
           id: Random().nextInt(10000).toString(),
           state: _list[Random().nextInt(_list.length)],
           items: Items().listItems,
         ),
-    OrderModel.map(
+        OrderModel.map(
           id: Random().nextInt(10000).toString(),
           state: _list[Random().nextInt(_list.length)],
           items: Items().listItems,
         ),
-    OrderModel.map(
+        OrderModel.map(
           id: Random().nextInt(10000).toString(),
           state: _list[Random().nextInt(_list.length)],
           items: Items().listItems,
         ),
-    OrderModel.map(
+        OrderModel.map(
           id: Random().nextInt(10000).toString(),
           state: _list[Random().nextInt(_list.length)],
           items: Items().listItems,

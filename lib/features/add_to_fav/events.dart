@@ -1,11 +1,9 @@
 part of 'bloc.dart';
 
-class FavEvents  {
+class FavEvents {}
 
-}
 class FavEvent extends FavEvents {
-   ProductModel product;
+  ProductModel product;
 
   FavEvent({required this.product});
-
 }

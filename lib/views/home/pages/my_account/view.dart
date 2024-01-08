@@ -2,8 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_string.dart';
-import 'package:themar/core/design/widget/image.dart';
-
+import 'package:themar/core/design/widget/app_image.dart';
 import '../../../../core/design/unit/app_assets.dart';
 import '../../../../core/logic/cashed_helper.dart';
 import '../../../../core/logic/helper_methods.dart';
@@ -41,7 +40,7 @@ class _MyAccountState extends State<MyAccount> {
             child: Column(
               children: [
                 Text(
-                  DataString.myAccount,
+                  DataString.myAccount.tr(),
                   style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -228,13 +227,16 @@ class _MyAccountState extends State<MyAccount> {
                     title: DataString.changeLanguage,
                     tap: () {
                       context.setLocale(
-                         CachedHelper.getCachedLanguageCode() == 'en'
+                          CachedHelper.getCachedLanguageCode() == 'en'
                               ? const Locale('ar')
-                              : const Locale('en',));
-                      CachedHelper.cacheLanguageCode(context.locale.languageCode);
+                              : const Locale(
+                                  'en',
+                                ));
+                      CachedHelper.cacheLanguageCode(
+                          context.locale.languageCode);
                       setState(() {
-                        print(context.locale.languageCode);
-                        print(CachedHelper.getCachedLanguageCode());
+                        debugPrint(context.locale.languageCode);
+                        debugPrint(CachedHelper.getCachedLanguageCode());
                       });
                     },
                   ),
@@ -349,6 +351,7 @@ class SettingsItems extends StatelessWidget {
             ),
             const Spacer(),
             InkWell(
+              onTap: tap,
               child: Padding(
                 padding: EdgeInsetsDirectional.only(end: 12.w),
                 child: AppImage(
@@ -356,7 +359,6 @@ class SettingsItems extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                 ),
               ),
-              onTap: tap,
             )
           ],
         ),

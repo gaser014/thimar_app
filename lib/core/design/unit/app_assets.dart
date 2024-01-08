@@ -53,13 +53,20 @@ class DataAssets {
   static const String iconShieldCheck = '${iconSvg}shield_check.svg';
   static const String iconQuestion = '${iconSvg}question.svg';
   static const String iconCallCalling = '${iconSvg}call_calling.svg';
-  static const String iconEdit= '${iconSvg}edit.svg';
-  static const String iconShared= '${iconSvg}shared.svg';
-  static const String iconInfo= '${iconSvg}info.svg';
-  static const String iconLanguage= '${iconSvg}language.svg';
-  static const String iconNote= '${iconSvg}note.svg';
-  static const String iconStarAccount= '${iconSvg}star_account.svg';
-  static const String iconTurnOff= '${iconSvg}turn_off.svg';
-  static const String iconArrowLeft= '${iconSvg}arrow_left.svg';
-
+  static const String iconEdit = '${iconSvg}edit.svg';
+  static const String iconShared = '${iconSvg}shared.svg';
+  static const String iconInfo = '${iconSvg}info.svg';
+  static const String iconLanguage = '${iconSvg}language.svg';
+  static const String iconNote = '${iconSvg}note.svg';
+  static const String iconStarAccount = '${iconSvg}star_account.svg';
+  static const String iconTurnOff = '${iconSvg}turn_off.svg';
+  static const String iconArrowLeft = '${iconSvg}arrow_left.svg';
+  static const String calendar = '${iconSvg}calendar.svg';
+  static const String calendarTimer = '${iconSvg}calendar_timer.svg';
+  static const String cash = '${iconSvg}cash.svg';
+  static const String visa = '${iconSvg}visa.svg';
+  static const String mastercard = '${iconSvg}mastercard.svg';
+  static const String edit2 = '${iconSvg}edit2.svg';
+  static const String locationMarker = '${iconSvg}location_marker.svg';
+  // static const String cash= '${iconSvg}cash.svg';
 }

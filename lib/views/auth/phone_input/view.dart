@@ -7,17 +7,22 @@ import 'package:themar/core/design/widget/app_input.dart';
 
 class PhoneInput extends StatefulWidget {
   final TextEditingController phoneController;
+  final String hint;
 
-  const PhoneInput(this.phoneController, {Key? key}) : super(key: key);
+  const PhoneInput({
+    required this.phoneController,
+    Key? key,
+    this.hint = DataString.phone,
+  }) : super(key: key);
 
   @override
   State<PhoneInput> createState() => _PhoneInputState();
 }
 
 class _PhoneInputState extends State<PhoneInput> {
-  late  String countryCode;
+  late String countryCode;
 
-  late  String icon;
+  late String icon;
 
   @override
   void initState() {
@@ -30,62 +35,55 @@ class _PhoneInputState extends State<PhoneInput> {
   Widget build(BuildContext context) {
     return AppInput(
       onChanged: (value) {
-
-        if(value?.length==11){
+        if (value?.length == 11) {
           setState(() {
             countryCode = DataString.codeEGY;
             icon = DataAssets.iconsEGY;
           });
         }
-        if(value?.length==10||value?.length==12){
+        if (value?.length == 10 || value?.length == 12) {
           setState(() {
             countryCode = DataString.codeKSA;
             icon = DataAssets.iconsKSA;
           });
-      }},
+        }
+      },
       widget: Container(
         width: 70.w,
-        height: 60.h,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15.r),
           border: Border.all(color: const Color(0xffF3F3F3)),
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
+        padding: EdgeInsets.symmetric(vertical: 6.h),
+        child: Column(
+          children: [
+            Expanded(
+              child: Image.asset(
                 icon,
-                width: 32.w,
-                height: 20.h,
                 fit: BoxFit.scaleDown,
               ),
-              SizedBox(height: 4.h),
-              Text(
-                countryCode.tr()
-                , style: TextStyle(
-                color: Theme
-                    .of(context)
-                    .primaryColor,
-                fontWeight: FontWeight.w400,
-              ),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(height: 2.h),
+            Text(
+              countryCode.tr(),
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12.sp),
+            ),
+          ],
         ),
       ),
       autofillHints: const [AutofillHints.telephoneNumber],
-      label: DataString.phone,
+      label: widget.hint,
       image: DataAssets.iconPhone,
       validator: (String? value) {
         if (value?.isEmpty ?? true) {
           return DataString.empty(DataString.phone);
-
-        }else if(value!.length<10||value.length>11){
+        } else if (value!.length < 10 || value.length > 11) {
           return DataString.phoneError;
         }
-
 
         return null;
       },
@@ -93,6 +91,4 @@ class _PhoneInputState extends State<PhoneInput> {
       keyboardType: TextInputType.phone,
     );
   }
-
-
 }

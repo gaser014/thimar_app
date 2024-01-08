@@ -15,7 +15,7 @@ import '../../../core/logic/get_it.dart';
 class ForgetPasswordView extends StatefulWidget {
   final formKey = GlobalKey<FormState>();
   final phoneController = TextEditingController();
-   ForgetPasswordView({Key? key}) : super(key: key);
+  ForgetPasswordView({Key? key}) : super(key: key);
 
   @override
   State<ForgetPasswordView> createState() => _ForgetPasswordViewState();
@@ -26,7 +26,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
 
   @override
   void initState() {
-    bloc =getIt<ForgetPasswordBloc>();
+    bloc = getIt<ForgetPasswordBloc>();
 
     super.initState();
   }
@@ -40,7 +40,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
             key: widget.formKey,
             child: Column(
               children: [
-                PhoneInput(widget.phoneController),
+                PhoneInput(phoneController: widget.phoneController),
                 SizedBox(height: 20.h),
                 BlocConsumer(
                   listener: (context, state) {
@@ -61,8 +61,9 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
                       child: AppButton(
                         text: DataString.login,
                         onPressed: () {
-                          if(widget.formKey.currentState!.validate()) {
-                            bloc.add(ForgetPasswordEvent(phone: widget.phoneController.text));
+                          if (widget.formKey.currentState!.validate()) {
+                            bloc.add(ForgetPasswordEvent(
+                                phone: widget.phoneController.text));
                           }
                         },
                         isLoading: state is ForgetPasswordLoadingState,

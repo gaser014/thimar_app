@@ -12,6 +12,7 @@ part 'model.dart';
 part 'events.dart';
 
 part 'states.dart';
+
 class ProductsBloc extends Bloc<ProductsEvents, ProductsStates> {
   int index = 0;
 
@@ -21,8 +22,10 @@ class ProductsBloc extends Bloc<ProductsEvents, ProductsStates> {
 
   Future<void> _getProducts(ProductEvent event, Emitter emit) async {
     emit(ProductsLoadingState());
-    final response = await DioHelper().getData(endPoint: endPoint(event.type,id: event.id),haveToken: true,
-    data:{"keyword":event.keyword??''} );
+    final response = await DioHelper().getData(
+        endPoint: endPoint(event.type, id: event.id),
+        haveToken: true,
+        data: {"keyword": event.keyword ?? ''});
     if (response.isSuccess) {
       final model = ProductsData.fromJson(response.response!.data);
       emit(ProductsSuccessState(model: model.list));
@@ -30,14 +33,15 @@ class ProductsBloc extends Bloc<ProductsEvents, ProductsStates> {
       emit(ProductsFieldState(message: response.message.toString()));
     }
   }
-  String endPoint(ProductType type,{int? id}){
-    switch(type){
+
+  String endPoint(ProductType type, {int? id}) {
+    switch (type) {
       case ProductType.favorite:
         return 'client/products/favorites';
       case ProductType.custom:
         return 'products';
-       case ProductType.category:
-        return '/categories/${id??0}';
+      case ProductType.category:
+        return '/categories/${id ?? 0}';
     }
   }
 }

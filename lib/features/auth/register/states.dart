@@ -10,8 +10,8 @@ class RegisterSuccessState extends RegisterStates {
   final bool isActivated;
 
   RegisterSuccessState({
-    required   this.phone,
-    required   this.isActivated,
+    required this.phone,
+    required this.isActivated,
     required this.message,
   }) {
     showMessage(

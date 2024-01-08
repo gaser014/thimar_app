@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-void navigateTo(Widget page,{bool removeHistory = false}) {
+void navigateTo(Widget page, {bool removeHistory = false}) {
   Navigator.pushAndRemoveUntil(
     navigatorKey.currentContext!,
     MaterialPageRoute(
@@ -17,11 +17,15 @@ enum MassageType {
   success,
   failed,
   warning,
-}enum ProductType {
+}
+
+enum ProductType {
   favorite,
   custom,
   category,
 }
+
+enum PaymentType { cash, visa, mastercard }
 
 void showMessage({
   required String message,
@@ -54,6 +58,7 @@ void showMessage({
     );
   }
 }
+
 MaterialColor? primarySwatch() {
   Color color = const Color(0xFF4C8613);
   return MaterialColor(color.value, {

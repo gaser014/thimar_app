@@ -63,7 +63,7 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
                 SizedBox(height: 16.h),
                 //phone
-                PhoneInput(phoneController),
+                PhoneInput(phoneController: phoneController),
                 SizedBox(height: 16.h),
                 //city
                 GestureDetector(

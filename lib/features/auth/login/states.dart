@@ -5,7 +5,7 @@ class LoginStates {}
 class LoginLoadingState extends LoginStates {}
 
 class LoginSuccessState extends LoginStates {
- final String message;
+  final String message;
   LoginSuccessState({required this.message}) {
     showMessage(
       message: message,

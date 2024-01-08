@@ -6,14 +6,14 @@ class AppCounter extends StatefulWidget {
   final void Function()? increment;
   final void Function()? decrement;
   final int amount;
-  int currentCount;
+  final int currentCount;
 
-  AppCounter({
+  const AppCounter({
     Key? key,
     required this.amount,
     this.increment,
     this.decrement,
-  required  this.currentCount ,
+    required this.currentCount,
   }) : super(key: key);
 
   @override
@@ -38,8 +38,7 @@ class _AppCounterState extends State<AppCounter> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap:
-            widget.increment,
+            onTap: widget.increment,
             child: Container(
               width: 30.w,
               height: 30.h,
@@ -66,23 +65,21 @@ class _AppCounterState extends State<AppCounter> {
                 color: Theme.of(context).primaryColor,
               )),
           GestureDetector(
-            onTap:
-            widget.decrement,
+            onTap: widget.decrement,
             child: Container(
               width: 30.w,
               height: 30.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.r),
-                color: widget.currentCount >1
-                    ? Colors.white
-                    : Colors.transparent,
+                color:
+                    widget.currentCount > 1 ? Colors.white : Colors.transparent,
               ),
               child: Center(
                 child: Icon(
                   Icons.remove,
-                  color: widget.currentCount >1
+                  color: widget.currentCount > 1
                       ? Theme.of(context).primaryColor
-                      :  Colors.grey,
+                      : Colors.grey,
                 ),
               ),
             ),

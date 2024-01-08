@@ -9,34 +9,29 @@ import 'package:themar/features/auth/register/bloc.dart';
 import 'package:themar/features/auth/reset_password/bloc.dart';
 import 'package:themar/features/cart/bloc.dart';
 import 'package:themar/features/categories/bloc.dart';
+import 'package:themar/features/location/bloc.dart';
 import 'package:themar/features/products/bloc.dart';
 import 'package:themar/features/review/bloc.dart';
 import 'package:themar/features/slider/bloc.dart';
 
-import '../../features/localization/app_localizations.dart';
-import '../../features/localization/locale_cubit.dart';
-
-var getIt= GetIt.instance;
-void getItServices(){
-  getIt.registerSingleton<AppLocalizations>(AppLocalizations());
-  getIt.registerFactory<LocaleCubit>(()=>LocaleCubit());
+var getIt = GetIt.instance;
+void getItServices() {
+  getIt.registerSingleton<LocationBloc>( LocationBloc());
 
   //Auth
-  getIt.registerFactory<CitiesBloc>(()=>CitiesBloc());
-  getIt.registerFactory<RegisterBloc>(()=>RegisterBloc());
-  getIt.registerFactory<LoginBloc>(()=>LoginBloc());
-  getIt.registerFactory<ForgetPasswordBloc>(()=>ForgetPasswordBloc());
-  getIt.registerFactory<ConfirmBloc>(()=>ConfirmBloc());
-  getIt.registerFactory<ResetPasswordBloc>(()=>ResetPasswordBloc());
+  getIt.registerFactory<CitiesBloc>(() => CitiesBloc());
+  getIt.registerFactory<RegisterBloc>(() => RegisterBloc());
+  getIt.registerFactory<LoginBloc>(() => LoginBloc());
+  getIt.registerFactory<ForgetPasswordBloc>(() => ForgetPasswordBloc());
+  getIt.registerFactory<ConfirmBloc>(() => ConfirmBloc());
+  getIt.registerFactory<ResetPasswordBloc>(() => ResetPasswordBloc());
 //==============================================================================================================
 //----home------
-getIt.registerFactory<SliderBloc>(()=>SliderBloc());
-  getIt.registerFactory<CategoriesBloc>(()=>CategoriesBloc());
-  getIt.registerFactory<ReviewsBloc>(()=>ReviewsBloc());
-  getIt.registerFactory<FavBloc>(()=>FavBloc());
+  getIt.registerFactory<SliderBloc>(() => SliderBloc());
+  getIt.registerFactory<CategoriesBloc>(() => CategoriesBloc());
+  getIt.registerFactory<ReviewsBloc>(() => ReviewsBloc());
+  getIt.registerFactory<FavBloc>(() => FavBloc());
   getIt.registerSingleton<CardBloc>(CardBloc());
-  getIt.registerFactory<AddToCardBloc>(()=>AddToCardBloc());
-  getIt.registerFactory<ProductsBloc>(()=>ProductsBloc());
-
-
+  getIt.registerSingleton<AddToCardBloc>(AddToCardBloc());
+  getIt.registerFactory<ProductsBloc>(() => ProductsBloc());
 }

@@ -38,6 +38,7 @@ class AppImage extends StatelessWidget {
           fit: fit,
           width: width,
           height: height,
+          // ignore: deprecated_member_use
           color: color,
         ),
       );

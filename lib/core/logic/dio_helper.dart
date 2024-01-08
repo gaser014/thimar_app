@@ -10,23 +10,24 @@ class DioHelper {
     ),
   );
   Future<CustomResponse> sendData(
-      {required String endPoint, Map<String, dynamic>? data,bool haveToken=false}) async {
-    Map<String, dynamic>? headers={
-      "Accept":"application/json",
-      "Accept-Language":    CachedHelper. getCachedLanguageCode()
-
+      {required String endPoint,
+      Map<String, dynamic>? data,
+      bool haveToken = false}) async {
+    Map<String, dynamic>? headers = {
+      "Accept": "application/json",
+      "Accept-Language": CachedHelper.getCachedLanguageCode()
     };
-    if(haveToken){
+    if (haveToken) {
       headers.addAll({
         "Authorization": "Bearer ${CachedHelper.getToken()}",
       });
     }
     try {
-      final response = await dio.post(endPoint, data: data,
-        options: Options(
-          headers: headers,
-        )
-      );
+      final response = await dio.post(endPoint,
+          data: data,
+          options: Options(
+            headers: headers,
+          ));
       debugPrint('$endPoint is Success ${response.data}');
       debugPrint(' ${response.data?['message']}');
       debugPrint('state code is ${response.statusCode}');
@@ -43,28 +44,30 @@ class DioHelper {
       return CustomResponse(
         response: e.response,
         isSuccess: false,
-        message: e.response?.data['message'].toString()??'Network Error',
+        message: e.response?.data['message'].toString() ?? 'Network Error',
       );
     }
   }
-  Future<CustomResponse> upDateData(
-      {required String endPoint, Map<String, dynamic>? data,bool haveToken=false}) async {
-    Map<String, dynamic>? headers={
-      "Accept":"application/json",
-      "Accept-Language":    CachedHelper. getCachedLanguageCode()
 
+  Future<CustomResponse> upDateData(
+      {required String endPoint,
+      Map<String, dynamic>? data,
+      bool haveToken = false}) async {
+    Map<String, dynamic>? headers = {
+      "Accept": "application/json",
+      "Accept-Language": CachedHelper.getCachedLanguageCode()
     };
-    if(haveToken){
+    if (haveToken) {
       headers.addAll({
         "Authorization": "Bearer ${CachedHelper.getToken()}",
       });
     }
     try {
-      final response = await dio.put(endPoint, data: data,
-        options: Options(
-          headers: headers,
-        )
-      );
+      final response = await dio.put(endPoint,
+          data: data,
+          options: Options(
+            headers: headers,
+          ));
       debugPrint('$endPoint is Success ${response.data}');
       debugPrint(' ${response.data?['message']}');
       debugPrint('state code is ${response.statusCode}');
@@ -81,29 +84,32 @@ class DioHelper {
       return CustomResponse(
         response: e.response,
         isSuccess: false,
-        message: e.response?.data['message'].toString()??'Network Error',
+        message: e.response?.data['message'].toString() ?? 'Network Error',
       );
     }
   }
 
   Future<CustomResponse> getData(
-      {required String endPoint, Map<String, dynamic>? data,bool haveToken=false}) async {
-    Map<String, dynamic>? headers=
-    {
-      "Accept":"application/json",
-      "Accept-Language":    CachedHelper. getCachedLanguageCode()
-
+      {required String endPoint,
+      Map<String, dynamic>? data,
+      bool haveToken = false}) async {
+    Map<String, dynamic>? headers = {
+      "Accept": "application/json",
+      "Accept-Language": CachedHelper.getCachedLanguageCode()
     };
-    if(haveToken){
+    if (haveToken) {
       headers.addAll({
         "Authorization": "Bearer ${CachedHelper.getToken()}",
       });
     }
     try {
-      final response = await dio.get(endPoint, queryParameters: data,
+      final response = await dio.get(
+        endPoint,
+        queryParameters: data,
         options: Options(
           headers: headers,
-        ),);
+        ),
+      );
       debugPrint('$endPoint is Success ${response.data}');
       debugPrint('*' * 50);
       return CustomResponse(
@@ -123,22 +129,26 @@ class DioHelper {
   }
 
   Future<CustomResponse> deleteData(
-      {required String endPoint, Map<String, dynamic>? data,bool haveToken=false}) async {
-    Map<String, dynamic>? headers={
-      "Accept":"application/json",
-      "Accept-Language":    CachedHelper. getCachedLanguageCode()
-
+      {required String endPoint,
+      Map<String, dynamic>? data,
+      bool haveToken = false}) async {
+    Map<String, dynamic>? headers = {
+      "Accept": "application/json",
+      "Accept-Language": CachedHelper.getCachedLanguageCode()
     };
-    if(haveToken){
+    if (haveToken) {
       headers.addAll({
         "Authorization": "Bearer ${CachedHelper.getToken()}",
       });
     }
     try {
-      final response = await dio.delete(endPoint, queryParameters: data,
+      final response = await dio.delete(
+        endPoint,
+        queryParameters: data,
         options: Options(
           headers: headers,
-        ),);
+        ),
+      );
       debugPrint('$endPoint is Success ${response.data}');
       debugPrint('*' * 50);
       return CustomResponse(
@@ -156,8 +166,6 @@ class DioHelper {
       );
     }
   }
-
-
 }
 
 class CustomResponse {

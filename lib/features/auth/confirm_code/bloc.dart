@@ -13,7 +13,6 @@ part 'states.dart';
 part 'events.dart';
 
 class ConfirmBloc extends Bloc<ConfirmEvents, ConfirmStates> {
-
   ConfirmBloc() : super(ConfirmStates()) {
     on<VerifyEvent>(_confirm);
     on<ResendEvent>(_resendCode);
@@ -21,7 +20,7 @@ class ConfirmBloc extends Bloc<ConfirmEvents, ConfirmStates> {
     on<ResetEvent>(_forgetPassword);
   }
 
-  _startTimer(TimerEvent event,  Emitter<ConfirmStates> emit) async {
+  _startTimer(TimerEvent event, Emitter<ConfirmStates> emit) async {
     for (int currentSecond = 90; currentSecond >= 1; currentSecond--) {
       await Future.delayed(const Duration(seconds: 1));
       emit(TimerStartedState(
@@ -34,10 +33,8 @@ class ConfirmBloc extends Bloc<ConfirmEvents, ConfirmStates> {
   Future<void> _confirm(VerifyEvent event, Emitter<ConfirmStates> emit) async {
     emit(ConfirmLoadingState());
 
-    final response = await DioHelper().sendData(
-        endPoint: 'verify',
-        data: event.data
-    );
+    final response =
+        await DioHelper().sendData(endPoint: 'verify', data: event.data);
     if (response.isSuccess) {
       final model = UserModel.fromJson(response.response!.data);
 
@@ -56,15 +53,12 @@ class ConfirmBloc extends Bloc<ConfirmEvents, ConfirmStates> {
     }
   }
 
-
-  Future<void> _forgetPassword(ResetEvent event,
-      Emitter<ConfirmStates> emit) async {
+  Future<void> _forgetPassword(
+      ResetEvent event, Emitter<ConfirmStates> emit) async {
     emit(ConfirmLoadingState());
 
-    final response = await DioHelper().sendData(
-        endPoint: 'check_code',
-        data: event.data
-    );
+    final response =
+        await DioHelper().sendData(endPoint: 'check_code', data: event.data);
 
     if (response.isSuccess) {
       emit(ConfirmSuccessState(
@@ -77,8 +71,8 @@ class ConfirmBloc extends Bloc<ConfirmEvents, ConfirmStates> {
     }
   }
 
-  Future<void> _resendCode(ResendEvent event,
-      Emitter<ConfirmStates> emit) async {
+  Future<void> _resendCode(
+      ResendEvent event, Emitter<ConfirmStates> emit) async {
     emit(ConfirmLoadingState());
     final response = await DioHelper().sendData(
       endPoint: 'resend_code',
@@ -91,7 +85,6 @@ class ConfirmBloc extends Bloc<ConfirmEvents, ConfirmStates> {
       add(TimerEvent());
       emit(ResendSuccessState(
         message: response.message,
-
       ));
     } else {
       emit(ConfirmFailedState(message: response.message));

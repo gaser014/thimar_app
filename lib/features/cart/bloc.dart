@@ -2,17 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:themar/core/logic/dio_helper.dart';
 import 'package:themar/core/logic/helper_methods.dart';
-
 import 'model.dart';
-
 part 'events.dart';
-
 part 'states.dart';
 
 class CardBloc extends Bloc<CardEvents, CardStates> {
-  bool isLoading = false;
-  final couponController = TextEditingController();
-
   CardBloc() : super(CardStates()) {
     on<GetCardEvent>(_getCard);
     on<SendCouponEvent>(_sendCoupon);
@@ -21,7 +15,7 @@ class CardBloc extends Bloc<CardEvents, CardStates> {
   }
 
   Future<void> _getCard(GetCardEvent event, Emitter emit) async {
-    print(event.massage);
+    debugPrint(event.massage);
     emit(CardLoadingState());
 
     final response = await DioHelper().getData(
@@ -30,8 +24,8 @@ class CardBloc extends Bloc<CardEvents, CardStates> {
     );
     if (response.isSuccess) {
       final modelDate = CardData.fromJson(response.response!.data);
-      print('print from card bloc ${modelDate.list.length}');
-      print('*'*150);
+      debugPrint('print from card bloc ${modelDate.list.length}');
+      debugPrint('*' * 150);
       emit(CardSuccessState(model: modelDate));
     } else {
       emit(CardFieldState(message: response.message.toString()));
@@ -43,15 +37,13 @@ class CardBloc extends Bloc<CardEvents, CardStates> {
     final response = await DioHelper().sendData(
         endPoint: 'client/cart/apply_coupon',
         haveToken: true,
-        data: {'code': couponController.text});
-    if (couponController.text.isNotEmpty) {
-      emit(CouponLoadingState());
-      if (response.isSuccess) {
-        final model = Coupon.fromJson(response.response!.data);
-        emit(CouponSuccessState(model: model));
-      } else {
-        emit(CouponFieldState(message: response.message.toString()));
-      }
+        data: {'code': event.couponController});
+    emit(CouponLoadingState());
+    if (response.isSuccess) {
+      final model = Coupon.fromJson(response.response!.data);
+      emit(CouponSuccessState(model: model));
+    } else {
+      emit(CouponFieldState(message: response.message.toString()));
     }
   }
 

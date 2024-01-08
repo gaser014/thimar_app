@@ -2,16 +2,26 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:themar/core/logic/helper_methods.dart';
 import '../../../../../../core/design/unit/app_string.dart';
 import '../../../../../../core/design/widget/app_button.dart';
 import '../../../../../../core/logic/get_it.dart';
 import '../../../../../../features/cart/bloc.dart';
 import '../../../../../../features/cart/model.dart';
+import '../finish_order/view.dart';
 
+//ignore: must_be_immutable
 class BottomCard extends StatefulWidget {
   CardData model;
+  final void Function() navigateTo;
+  final String text;
 
-  BottomCard({Key? key, required this.model}) : super(key: key);
+  BottomCard({
+    Key? key,
+    required this.model,
+    required this.navigateTo,
+    this.text = DataString.finishedCard,
+  }) : super(key: key);
 
   @override
   State<BottomCard> createState() => _BottomCardState();
@@ -135,11 +145,16 @@ class _BottomCardState extends State<BottomCard> {
             ),
           ),
           SizedBox(height: 16.h),
+          if(widget.text == DataString.finishedCard)
           SizedBox(
             width: double.infinity,
             child: AppButton(
-              text: DataString.finishedCard.tr(),
-              onPressed: () {},
+              text: widget.text.tr(),
+              onPressed: () {
+                navigateTo(FinishOrderView(
+                  model: widget.model,
+                ));
+              },
             ),
           ),
         ],

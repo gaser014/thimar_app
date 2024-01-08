@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_assets.dart';
 import 'package:themar/core/design/unit/app_string.dart';
-import 'package:themar/core/design/widget/image.dart';
+import 'package:themar/core/design/widget/app_image.dart';
 
 class AuthBody extends StatefulWidget {
   final Widget widgetForm;
@@ -21,11 +21,11 @@ class AuthBody extends StatefulWidget {
     required this.widgetForm,
     required this.title,
     required this.subTitle,
-    this.bottomText ,
-    this.bottomTextButton ,
+    this.bottomText,
+    this.bottomTextButton,
     this.phone,
     this.onPress,
-    this.phoneChanged ,
+    this.phoneChanged,
     this.changePhone,
   }) : super(key: key);
 
@@ -71,10 +71,9 @@ class _AuthBodyState extends State<AuthBody> {
                   ),
                 ),
                 Text(
-                  widget.subTitle.tr(
-                  ),
+                  widget.subTitle.tr(),
                   style: TextStyle(
-                    color: Color(0xff707070),
+                    color: const Color(0xff707070),
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w300,
                   ),
@@ -88,7 +87,7 @@ class _AuthBodyState extends State<AuthBody> {
                             Text(
                               widget.phone!,
                               style: TextStyle(
-                                color: Color(0xff707070),
+                                color: const Color(0xff707070),
                                 fontSize: 16.sp,
                                 fontWeight: FontWeight.w300,
                               ),
@@ -97,12 +96,13 @@ class _AuthBodyState extends State<AuthBody> {
                               width: 8,
                             ),
                             widget.changePhone == null
-
                                 ? const SizedBox()
                                 : InkWell(
                                     onTap: widget.changePhone,
                                     child: Text(
-                                      (   widget.phoneChanged??DataString.changePhone).tr(),
+                                      (widget.phoneChanged ??
+                                              DataString.changePhone)
+                                          .tr(),
                                       style: TextStyle(
                                         color: Theme.of(context).primaryColor,
                                         fontSize: 16.sp,
@@ -121,7 +121,7 @@ class _AuthBodyState extends State<AuthBody> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      (widget.bottomText?? DataString.haveAccount).tr(),
+                      (widget.bottomText ?? DataString.haveAccount).tr(),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16.sp,
@@ -132,7 +132,7 @@ class _AuthBodyState extends State<AuthBody> {
                     TextButton(
                       onPressed: widget.onPress,
                       child: Text(
-                        ( widget.bottomTextButton?? DataString.login) .tr(),
+                        (widget.bottomTextButton ?? DataString.login).tr(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18.sp,

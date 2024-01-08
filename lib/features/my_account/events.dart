@@ -1,3 +1,5 @@
 part of 'bloc.dart';
-class MyAccountEvents{}
-class MyAccountEvent extends MyAccountEvents{}
+
+class MyAccountEvents {}
+
+class MyAccountEvent extends MyAccountEvents {}

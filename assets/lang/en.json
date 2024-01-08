@@ -15,7 +15,6 @@
   "login": "Login",
   "passwordError": "Incorrect Password",
   "empty": "is empty",
-
   "codeKSA": "+966",
   "codeEGY": "+20",
   "activateAccount": "Please activate the account",
@@ -66,10 +65,14 @@
   "vat": "VAT",
   "totalCard": "Total",
   "finishedCard": "Proceed to Checkout",
+  "finishCard": "Finish Order",
+  "cash": "cash",
+  "addressTitle": "Address",
+  "addNewAddress": "Add New Address",
   "haveCoupon": "Have a coupon?",
   "enterCoupon": "Please enter the coupon",
   "apply": "Apply",
-  "currency":"SAR",
+  "currency": "SAR",
   "personalInfo": "Personal Information",
   "wallet": "Wallet",
   "address": "Addresses",
@@ -131,6 +134,7 @@
   "fromHighToLow": "From High to Low Price",
   "fromLowToHigh": "From Low to High Price",
   "applyFilter": "Apply",
-  "orYouCanSendMessage": "Or you can send a message"
-
+  "orYouCanSendMessage": "Or you can send a message",
+ "enterPhone": "Enter your phone number",
+    "setAsMainAddress": "Set as Main Address"
 }

@@ -26,10 +26,13 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   late final LoginBloc bloc;
+  var formKey = GlobalKey<FormState>();
+  final phoneController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   void initState() {
-    bloc =getIt<LoginBloc>();
+    bloc = getIt<LoginBloc>();
     super.initState();
   }
 
@@ -39,11 +42,11 @@ class _LoginViewState extends State<LoginView> {
       child: Scaffold(
         body: AuthBody(
             widgetForm: Form(
-              key: bloc.formKey,
+              key: formKey,
               child: Column(
                 children: [
                   //phone number
-                  PhoneInput(bloc.phoneController),
+                  PhoneInput(phoneController: phoneController),
                   SizedBox(height: 16.h),
                   //password
                   AppInput(
@@ -61,7 +64,7 @@ class _LoginViewState extends State<LoginView> {
 
                       return null;
                     },
-                    controller: bloc.passwordController,
+                    controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,
                   ),
                   SizedBox(height: 20.h),
@@ -70,7 +73,7 @@ class _LoginViewState extends State<LoginView> {
                     alignment: AlignmentDirectional.centerEnd,
                     child: TextButton(
                       onPressed: () {
-                        navigateTo( ForgetPasswordView(),removeHistory: true);
+                        navigateTo(ForgetPasswordView(), removeHistory: true);
                       },
                       child: Text(
                         DataString.forgetPassword.tr(),
@@ -92,12 +95,12 @@ class _LoginViewState extends State<LoginView> {
                       } else if (state is LoginFailedState) {
                         if (state.type == MassageType.warning) {
                           navigateTo(
-                            ConfirmCodeView(
-                              phone: bloc.phoneController.text,
-                              isActive: true,
-                            ),removeHistory: true
-                          );
-                    //4544121242064545
+                              ConfirmCodeView(
+                                phone: phoneController.text,
+                                isActive: true,
+                              ),
+                              removeHistory: true);
+                          //4544121242064545
                         }
                       }
                     },
@@ -108,7 +111,14 @@ class _LoginViewState extends State<LoginView> {
                         child: AppButton(
                           text: DataString.login,
                           onPressed: () {
-                            bloc.add(LoginEvent());
+                            if (formKey.currentState!.validate()) {
+                              bloc.add(
+                                LoginEvent(
+                                  phone: phoneController.text,
+                                  password: passwordController.text,
+                                ),
+                              );
+                            }
                           },
                           isLoading: state is LoginLoadingState,
                         ),
@@ -124,7 +134,7 @@ class _LoginViewState extends State<LoginView> {
             bottomTextButton: DataString.register,
             //register button
             onPress: () {
-              navigateTo(const RegisterView(),removeHistory: true);
+              navigateTo(const RegisterView(), removeHistory: true);
             }),
       ),
     );

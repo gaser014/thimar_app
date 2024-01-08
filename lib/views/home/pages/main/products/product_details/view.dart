@@ -5,12 +5,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:themar/core/design/unit/app_assets.dart';
 import 'package:themar/core/design/unit/app_string.dart';
 import 'package:themar/core/design/widget/app_counter.dart';
-import 'package:themar/core/design/widget/image.dart';
+import 'package:themar/core/design/widget/app_image.dart';
+import 'package:themar/core/logic/get_it.dart';
+import 'package:themar/core/logic/helper_methods.dart';
 import '../../../../../../features/add_to_card/bloc.dart';
+import '../../../../../../features/cart/bloc.dart';
+import '../../../../../../features/cart/model.dart';
 import '../../../../../../features/products/bloc.dart';
+import '../../../../view.dart';
 import '../../add_to_fav/view.dart';
+import '../../cart/view.dart';
 import '../../review/view.dart';
 import '../view.dart';
+
+part 'widget/bottom_nav.dart';
+part 'widget/sheet.dart';
 
 class ProductDetailsView extends StatefulWidget {
   final ProductModel model;
@@ -31,7 +40,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar:widget.model.amount!=0?BottomDetails(widget.model):null,
+        bottomNavigationBar:
+            widget.model.amount != 0 ? BottomDetails(widget.model) : null,
         body: ListView(
           children: [
             DetailsImageView(model: widget.model),
@@ -72,7 +82,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                             color: Theme.of(context).primaryColor,
                           ),
                           TextSpan(
-                            text: "${widget.model.price} ${DataString.currency.tr()}",
+                            text:
+                                "${widget.model.price} ${DataString.currency.tr()}",
                             style: TextStyle(
                               fontSize: 17.sp,
                               fontWeight: FontWeight.bold,
@@ -80,7 +91,8 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
                             children: [
                               const TextSpan(text: " "),
                               TextSpan(
-                                text: "${widget.model.priceBeforeDiscount} ${DataString.currency.tr()}",
+                                text:
+                                    "${widget.model.priceBeforeDiscount} ${DataString.currency.tr()}",
                                 style: TextStyle(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w300,
@@ -220,82 +232,6 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
               ),
             )
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class BottomDetails extends StatelessWidget {
-  final ProductModel model;
-
-  const BottomDetails(this.model, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final bloc = BlocProvider.of<AddToCardBloc>(context);
-    return BlocBuilder(
-      bloc: bloc,
-      builder: (context, state) => StatefulBuilder(
-        builder: (context, setState) => InkWell(
-          child: Container(
-              height: 60.h,
-              color: Theme.of(context).primaryColor,
-              child: Padding(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 32.0.r, vertical: 14.0.w),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 32.h,
-                      width: 36.w,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff61B80C),
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
-                      child: const AppImage(
-                        path: DataAssets.iconBasket,
-                        color: Colors.white,
-                        fit: BoxFit.scaleDown,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.0.w,
-                    ),
-                    Text(
-                      DataString.addToCart.tr(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Spacer(),
-                    Text(
-                      "${model.totalPrice} ${DataString.currency}",
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              )),
-          onTap: () {
-            if (state is! AddToCardLoadingState && model.amount != 0) {
-              bloc.add(AddToCardEvent(
-                model: model,
-              ));
-              if (state is AddToCardSuccessState) {
-                // navigateTo(const HomeView());
-                //todo
-                // showModalBottomSheet(context: context, builder: (context)=>const B()
-
-                // );
-              }
-            }
-          },
         ),
       ),
     );

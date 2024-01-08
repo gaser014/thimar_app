@@ -1,4 +1,5 @@
 part of 'bloc.dart';
+
 class ResetPasswordState {}
 
 class ResetPasswordLoadingState extends ResetPasswordState {}

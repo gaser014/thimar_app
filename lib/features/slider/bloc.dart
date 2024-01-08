@@ -4,6 +4,7 @@ import '../../core/logic/helper_methods.dart';
 import 'model.dart';
 part 'events.dart';
 part 'states.dart';
+
 class SliderBloc extends Bloc<SliderEvents, SliderStates> {
   int index = 0;
   SliderBloc() : super(SliderStates()) {
@@ -17,10 +18,8 @@ class SliderBloc extends Bloc<SliderEvents, SliderStates> {
     if (response.isSuccess) {
       final model = SliderData.fromJson(response.response!.data);
       emit(SliderSuccessState(model: model.list));
-    }
-    else{
+    } else {
       emit(SliderFieldState(message: response.message.toString()));
     }
   }
-
 }

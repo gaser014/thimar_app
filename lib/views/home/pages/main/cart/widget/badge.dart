@@ -20,7 +20,7 @@ class CartBadgeView extends StatefulWidget {
 class _CartBadgeViewState extends State<CartBadgeView> {
   late final CardBloc bloc;
   @override
-void initState() {
+  void initState() {
     bloc = getIt<CardBloc>();
     bloc.add(GetCardEvent(massage: 'Hello from cart badge'));
     super.initState();
@@ -29,27 +29,26 @@ void initState() {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-
       bloc: bloc,
       builder: (BuildContext context, CardStates state) {
         if (state is CardSuccessState) {
           return GestureDetector(
             onTap: () {
-              if (state.model.list.isNotEmpty){
-              navigateTo( CartView(model: state.model,));}
+              if (state.model.list.isNotEmpty) {
+                navigateTo(CardView(
+                  model: state.model,
+                ));
+              }
             },
             child: Transform.flip(
-              flipX: context.locale==     Locale('en', 'US'),
-
+              flipX: context.locale == const Locale('en', 'US'),
               child: Badge(
                 isLabelVisible: state.model.list.isNotEmpty,
                 offset: Offset(8.w, -8.h),
                 padding: EdgeInsets.all(2.r),
                 backgroundColor: Colors.white,
                 alignment: Alignment.topRight,
-
                 label: CircleAvatar(
-
                   radius: 6.r,
                   backgroundColor: Theme.of(context).primaryColor,
                   child: Text(

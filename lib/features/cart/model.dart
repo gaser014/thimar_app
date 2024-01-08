@@ -58,7 +58,7 @@ class CardData {
     isVip = json['is_vip'] ?? 1;
     vipDiscountPercentage = json['vip_discount_percentage'] ?? 1;
     minVipPrice = json['min_vip_price'] ?? 1;
-    vipMessage = json['vip_message'] ??  DataString.vipMessage;
+    vipMessage = json['vip_message'] ?? DataString.vipMessage;
     status = json['status'] ?? '';
   }
 

@@ -14,13 +14,11 @@ class ForgetPasswordBloc
     on<ForgetPasswordEvent>(_send);
   }
 
-  Future<void> _send(ForgetPasswordEvent event,
-      Emitter<ForgetPasswordStates> emit) async {
+  Future<void> _send(
+      ForgetPasswordEvent event, Emitter<ForgetPasswordStates> emit) async {
     emit(ForgetPasswordLoadingState());
-    final response = await DioHelper().sendData(
-        endPoint: "forget_password",
-        data: event.data
-    );
+    final response = await DioHelper()
+        .sendData(endPoint: "forget_password", data: event.data);
     debugPrint(response.response?.data.toString());
     if (response.isSuccess) {
       emit(ForgetPasswordSuccessState(
@@ -32,4 +30,3 @@ class ForgetPasswordBloc
     }
   }
 }
-

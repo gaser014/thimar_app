@@ -2,8 +2,9 @@ class CitiesData {
   late final List<CitiesModel> list;
 
   CitiesData.fromJson(Map<String, dynamic> json) {
-    list = List.from(json['data']??[]).map((e) => CitiesModel.fromJson(e)).toList();
-
+    list = List.from(json['data'] ?? [])
+        .map((e) => CitiesModel.fromJson(e))
+        .toList();
   }
 }
 

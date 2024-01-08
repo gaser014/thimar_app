@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/design/widget/image.dart';
+import '../../../../../core/design/widget/app_image.dart';
 import '../../../../../features/slider/bloc.dart';
 
 class SliderView extends StatefulWidget {
@@ -41,9 +41,7 @@ class _SliderViewState extends State<SliderView> {
                     autoPlay: true,
                     onPageChanged: (index, reason) {
                       bloc.index = index;
-                      setState(() {
-
-                      });
+                      setState(() {});
                     },
                   ),
                 ),

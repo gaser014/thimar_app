@@ -1,5 +1,3 @@
-
-
 import 'package:easy_localization/easy_localization.dart';
 
 // class DataString {
@@ -155,8 +153,7 @@ import 'package:easy_localization/easy_localization.dart';
 //
 // }
 
-
-class DataString{
+class DataString {
   static String empty(text) => "$text ${'empty'.tr()}";
 
   static const stateAccept = 'stateAccept';
@@ -291,6 +288,10 @@ class DataString{
   static const applyFilter = 'applyFilter';
   static const orYouCanSendMessage = 'orYouCanSendMessage';
 
-
-
+  static const finishCard = 'finishCard';
+  static const cash = 'cash';
+  static const addressTitle = 'addressTitle';
+  static const addNewAddress = 'addNewAddress';
+  static const enterPhone = 'enterPhone';
+  static const setAsMainAddress = 'setAsMainAddress';
 }

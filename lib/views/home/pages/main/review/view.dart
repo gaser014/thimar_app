@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/design/unit/app_string.dart';
-import '../../../../../core/design/widget/image.dart';
+import '../../../../../core/design/widget/app_image.dart';
 import '../../../../../core/logic/get_it.dart';
 import '../../../../../features/review/bloc.dart';
 
@@ -20,7 +19,7 @@ class ReviewView extends StatefulWidget {
 }
 
 class _ReviewViewState extends State<ReviewView> {
- late final ReviewsBloc bloc ;
+  late final ReviewsBloc bloc;
   @override
   void initState() {
     bloc = getIt<ReviewsBloc>();
@@ -28,6 +27,7 @@ class _ReviewViewState extends State<ReviewView> {
     bloc.add(ReviewEvent(id: widget.id));
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
@@ -36,35 +36,41 @@ class _ReviewViewState extends State<ReviewView> {
         if (state is ReviewLoadingState) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is ReviewSuccessState) {
-          return state.model.isEmpty?        Padding(
-            padding:  EdgeInsets.symmetric(vertical: 16.0.h),
-            child: Text(
-             DataString.noReview.tr(),
-              style: TextStyle(
-                fontSize: 17.sp,
-                fontWeight: FontWeight.w300,
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-          ): Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                DataString.review.tr(),
-                style: TextStyle(
-                  fontSize: 17.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              SizedBox(
-                height: 110.h,
-                child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: List.generate(state.model.length, (index) => _Review(model: state.model[index],))),
-              ),
-            ],
-          );
+          return state.model.isEmpty
+              ? Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0.h),
+                  child: Text(
+                    DataString.noReview.tr(),
+                    style: TextStyle(
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.w300,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      DataString.review.tr(),
+                      style: TextStyle(
+                        fontSize: 17.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 110.h,
+                      child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: List.generate(
+                              state.model.length,
+                              (index) => _Review(
+                                    model: state.model[index],
+                                  ))),
+                    ),
+                  ],
+                );
         } else if (state is ReviewFieldState) {
           return Center(child: Text(state.message));
         } else {
@@ -76,8 +82,8 @@ class _ReviewViewState extends State<ReviewView> {
 }
 
 class _Review extends StatelessWidget {
- final ReviewModel model;
-  const _Review({Key? key,required this.model}) : super(key: key);
+  final ReviewModel model;
+  const _Review({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -112,8 +118,8 @@ class _Review extends StatelessWidget {
                     width: 110.w,
                     child: Text(
                       model.clientName,
-                      style:
-                          TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 16.sp, fontWeight: FontWeight.bold),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -125,7 +131,9 @@ class _Review extends StatelessWidget {
                     itemCount: 5,
                     itemPadding: EdgeInsets.symmetric(horizontal: 2.w),
                     itemBuilder: (context, index) => Icon(
-                      index >= model.value ? Icons.star_outline : Icons.star_outlined,
+                      index >= model.value
+                          ? Icons.star_outline
+                          : Icons.star_outlined,
                       color: const Color(0xffFF9529),
                     ),
                   ),
@@ -134,7 +142,8 @@ class _Review extends StatelessWidget {
               SizedBox(
                 height: 42.h,
                 width: 180.w,
-                child: Text(model.comment,
+                child: Text(
+                  model.comment,
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w300),
                   maxLines: 2,

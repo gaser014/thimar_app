@@ -22,7 +22,6 @@ class ProductsData {
 }
 
 class ProductModel {
-
   late final int categoryId, id, priceBeforeDiscount;
   late final String title;
   late final String description;
@@ -47,9 +46,9 @@ class ProductModel {
     description = json['description'] ?? '';
     code = json['code'] ?? '';
     priceBeforeDiscount = json['price_before_discount'] ?? 0;
-    price =double.tryParse (json['price'].toStringAsFixed(2)) ?? 0;
+    price = double.tryParse(json['price'].toStringAsFixed(2)) ?? 0;
     discount = (json['discount'] * 100).toInt();
-    amount =double.tryParse( json['amount'].toString())?.toInt() ?? 0;
+    amount = double.tryParse(json['amount'].toString())?.toInt() ?? 0;
     count = json['count'] ?? 1;
     totalPrice = getTotalPrice(count);
     isActive = json['is_active'] ?? 0;
@@ -63,13 +62,11 @@ class ProductModel {
   }
 
   double getTotalPrice(int count) {
-
-    return double.tryParse((price * count).toStringAsFixed(2))??0;
+    return double.tryParse((price * count).toStringAsFixed(2)) ?? 0;
   }
 
   // Widget get favoriteWid
-  Widget getFavoriteIcon(bool isFavorite) =>
-      AppBarIcon(
+  Widget getFavoriteIcon(bool isFavorite) => AppBarIcon(
         path: DataAssets.iconFavorite,
         isFavorite: isFavorite,
       );
@@ -97,5 +94,3 @@ class Images {
     url = json['url'] ?? '';
   }
 }
-
-

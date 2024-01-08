@@ -32,7 +32,7 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
 
   @override
   void initState() {
-    bloc =getIt.get<ConfirmBloc>();
+    bloc = getIt.get<ConfirmBloc>();
     bloc.add(TimerEvent());
     super.initState();
   }
@@ -167,7 +167,8 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
                                     ),
                                     Center(
                                       child: Text(
-                                        "${state.currentSecond ~/ 60}:${(state.currentSecond % 60).toString().padLeft(2, '0')}".tr(),
+                                        "${state.currentSecond ~/ 60}:${(state.currentSecond % 60).toString().padLeft(2, '0')}"
+                                            .tr(),
                                         style: TextStyle(
                                           color: const Color(0xff707070),
                                           fontWeight: FontWeight.w300,
@@ -192,7 +193,7 @@ class _ConfirmCodeViewState extends State<ConfirmCodeView> {
             changePhone: widget.isActive
                 ? null
                 : () {
-                    navigateTo( ForgetPasswordView(), removeHistory: true);
+                    navigateTo(ForgetPasswordView(), removeHistory: true);
                   },
             onPress: () {
               navigateTo(const LoginView(), removeHistory: true);

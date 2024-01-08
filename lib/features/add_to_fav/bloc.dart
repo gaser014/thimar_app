@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:themar/core/logic/dio_helper.dart';
 import 'package:themar/core/logic/helper_methods.dart';
 import 'package:themar/features/products/bloc.dart';
-
 
 part 'states.dart';
 
@@ -32,7 +30,7 @@ class FavBloc extends Bloc<FavEvents, FavStates> {
       event.product.favoriteIcon =
           event.product.getFavoriteIcon(event.product.isFavorite);
       showMessage(message: response.message, type: MassageType.success);
-      emit(FavSuccessState(product: event.product,message:  response.message));
+      emit(FavSuccessState(product: event.product, message: response.message));
     } else {
       showMessage(message: response.message);
 

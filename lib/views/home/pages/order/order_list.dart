@@ -17,32 +17,32 @@ class OrderList extends StatelessWidget {
     }
     return Center(
       child: Padding(
-        padding:  EdgeInsets.only(top: 16.0.h),
+        padding: EdgeInsets.only(top: 16.0.h),
         child: Container(
           height: 100.h,
-          padding:  EdgeInsets.all(8.r),
+          padding: EdgeInsets.all(8.r),
           // margin: const EdgeInsets.only(bottom: 9),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius:  BorderRadius.all(Radius.circular(16.r)),
+            borderRadius: BorderRadius.all(Radius.circular(16.r)),
             boxShadow: [
               BoxShadow(
                 color: const Color(0xfF000000).withOpacity(.02),
                 blurRadius: 17,
-                offset:  Offset(0, 6.h),
+                offset: Offset(0, 6.h),
               ),
             ],
           ),
           child: Row(
             children: [
-               SizedBox(
+              SizedBox(
                 width: 6.w,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${DataString.order} #${model.id}'.tr(),
+                    '${DataString.order.tr()} #${model.id}'.tr(),
                     style: TextStyle(
                       fontSize: 17.sp,
                       fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class OrderList extends StatelessWidget {
                   ),
                   Text(
                     model.date.tr(),
-                    style:  TextStyle(
+                    style: TextStyle(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w300,
                       color: const Color(0xff9C9C9C),
@@ -66,13 +66,13 @@ class OrderList extends StatelessWidget {
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) => Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 3.w),
+                            padding: EdgeInsets.symmetric(horizontal: 3.w),
                             child: Container(
                               width: 25.w,
                               height: 25.h,
                               decoration: BoxDecoration(
                                 borderRadius:
-                                     BorderRadius.all(Radius.circular(8.r)),
+                                    BorderRadius.all(Radius.circular(8.r)),
                                 border: Border.all(
                                   color:
                                       const Color(0xff61B80C).withOpacity(.06),
@@ -92,7 +92,7 @@ class OrderList extends StatelessWidget {
                               model.items.length < 3 ? model.items.length : 3,
                         ),
                       ),
-                       SizedBox(
+                      SizedBox(
                         width: 4.w,
                       ),
                       model.items.length <= 3
@@ -101,7 +101,7 @@ class OrderList extends StatelessWidget {
                               width: 25.w,
                               height: 25.h,
                               alignment: Alignment.center,
-                              decoration:  BoxDecoration(
+                              decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(8.r)),
                                 color: const Color(0xffEDF5E6),
@@ -116,7 +116,7 @@ class OrderList extends StatelessWidget {
                               )),
                     ],
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 6.h,
                   )
                 ],
@@ -129,7 +129,7 @@ class OrderList extends StatelessWidget {
                     height: 26.h,
                     decoration: BoxDecoration(
                       color: Color(model.state.background).withOpacity(.2),
-                      borderRadius:  BorderRadius.all(Radius.circular(8.r)),
+                      borderRadius: BorderRadius.all(Radius.circular(8.r)),
                     ),
                     child: Center(
                       child: Text(
@@ -151,7 +151,7 @@ class OrderList extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 6.h,
                   ),
                 ],
